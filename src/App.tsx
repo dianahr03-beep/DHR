@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import {
-  ArrowRight, BarChart3, Bell, Building2, Check, CheckCircle2, Clock, Database, FileSpreadsheet,
+  ArrowRight, BarChart3, Building2, Check, CheckCircle2, Clock, Database, FileSpreadsheet,
   FolderKanban, Hourglass, LayoutDashboard, Lock, Mail, Menu, MessageCircle, Palette,
   Rocket, Scale, ShieldCheck, Smartphone, Sparkles, Stethoscope, Users, X, Zap, FileWarning, Repeat,
 } from 'lucide-react'
@@ -185,7 +185,7 @@ function ProblemaSolucion() {
     { icon: Database, t: 'Una sola fuente de verdad', d: 'Toda tu información ordenada en un solo lugar.' },
     { icon: FileSpreadsheet, t: 'Reportes en un clic', d: 'El reporte del día se arma solo y se descarga en Excel.' },
     { icon: LayoutDashboard, t: 'Ves todo de un vistazo', d: 'Un tablero con lo importante, apenas abres la app.' },
-    { icon: Bell, t: 'Avisos automáticos', d: 'La app te avisa lo que se está atrasando, antes de que duela.' },
+    { icon: Users, t: 'Todo tu equipo en sintonía', d: 'Cada quien ve en qué va cada asunto, sin preguntar por WhatsApp.' },
   ]
   return (
     <section id="solucion" className="py-24">
@@ -258,7 +258,7 @@ function Industrias() {
       id: 'abogados', icon: Scale, nombre: 'Abogados', color: 'from-violet-600 to-indigo-600',
       titulo: 'Control de juicios y cobros para tu despacho',
       texto: 'Sabe en qué va cada expediente, quién lo lleva, cuál es el siguiente paso y cuánto deja cada caso.',
-      puntos: ['Expedientes con su historial de movimientos', 'Alertas de casos sin actualizar', 'Cobros, gastos, impuestos y comisiones', 'Reporte diario por estatus'],
+      puntos: ['Expedientes con su historial de movimientos', 'Siguiente paso de cada caso', 'Cobros, gastos, impuestos y comisiones', 'Reporte diario por estatus'],
     },
     {
       id: 'doctores', icon: Stethoscope, nombre: 'Doctores y clínicas', color: 'from-emerald-500 to-teal-600',
@@ -318,7 +318,7 @@ function Industrias() {
 
 function Demo() {
   const vistas = [
-    { id: 'tablero', label: 'Tablero del dueño', img: '/capturas/1-tablero-dueno.webp', movil: '/capturas/8-celular-tablero.webp', d: 'Apenas entras ves cuántos juicios hay por estatus, la utilidad del despacho, los avisos nuevos y lo que requiere atención.' },
+    { id: 'tablero', label: 'Tablero del dueño', img: '/capturas/1-tablero-dueno.webp', movil: '/capturas/8-celular-tablero.webp', d: 'Apenas entras ves cuántos juicios hay por estatus, la utilidad del despacho y lo que requiere atención.' },
     { id: 'juicios', label: 'Lista de juicios', img: '/capturas/juicios-lista.webp', movil: '/capturas/celular-juicios.webp', d: 'Todos los expedientes con buscador y filtros: quién lo lleva, en qué etapa va y cuál es el siguiente paso.' },
     { id: 'finanzas', label: 'Detalle y finanzas', img: '/capturas/3-detalle-y-finanzas.webp', movil: null, d: 'Cada caso con su historial y sus números: cobros, gastos, impuestos, comisión y la utilidad real.' },
     { id: 'reporte', label: 'Reporte diario', img: '/capturas/4-reporte-diario.webp', movil: null, d: 'El reporte que antes tomaba horas, ahora se genera solo y se descarga en un clic.' },
