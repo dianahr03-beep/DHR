@@ -580,7 +580,9 @@ function Footer() {
 function WhatsAppFlotante() {
   return (
     <a
-      href="#contacto"
+      href={`https://wa.me/${negocio.whatsapp}?text=${encodeURIComponent(negocio.mensajeWhatsApp)}`}
+      target="_blank"
+      rel="noopener noreferrer"
       aria-label="Contáctanos por WhatsApp"
       className="fixed bottom-5 right-5 z-50 grid size-14 place-items-center rounded-full bg-[#1fa855] text-white shadow-xl shadow-green-700/30 transition hover:scale-110"
     >
