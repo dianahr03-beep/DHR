@@ -172,11 +172,11 @@ function Franja() {
   )
 }
 
-function Titulo({ etiqueta, titulo, sub, light = false }: { etiqueta: string; titulo: React.ReactNode; sub?: string; light?: boolean }) {
+function Titulo({ etiqueta, titulo, sub, light = false, ancho = false }: { etiqueta: string; titulo: React.ReactNode; sub?: string; light?: boolean; ancho?: boolean }) {
   return (
-    <div className="mx-auto max-w-3xl text-center">
+    <div className={cn('mx-auto text-center', ancho ? 'max-w-4xl' : 'max-w-3xl')}>
       <p className={cn('text-sm font-bold uppercase tracking-widest', light ? 'text-orange-300' : 'text-violet-600')}>{etiqueta}</p>
-      <h2 className={cn('mt-3 text-3xl font-extrabold tracking-tight sm:text-4xl lg:text-5xl', light ? 'text-white' : 'text-slate-900')}>{titulo}</h2>
+      <h2 className={cn('mt-3 text-balance text-3xl font-extrabold tracking-tight sm:text-4xl lg:text-5xl', light ? 'text-white' : 'text-slate-900')}>{titulo}</h2>
       {sub && <p className={cn('mt-5 text-balance text-lg leading-relaxed', light ? 'text-violet-100' : 'text-slate-600')}>{sub}</p>}
     </div>
   )
@@ -245,7 +245,7 @@ function QueIncluye() {
   return (
     <section className="bg-slate-50 py-24">
       <div className="mx-auto max-w-7xl px-4 sm:px-6">
-        <Titulo etiqueta="Qué incluye" titulo="Una aplicación completa, diseñada para tu negocio" sub="Todo lo que necesitas en un sistema profesional, hecho completamente a la medida de tu negocio." />
+        <Titulo etiqueta="Qué incluye" titulo="Una aplicación completa, diseñada para tu negocio" sub="Todo lo que necesitas en un sistema profesional, hecho completamente a la medida de tu negocio." ancho />
         <div className="mt-16 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
           {items.map(({ icon: I, c, t, d }) => (
             <div key={t} className="group rounded-3xl border border-slate-200 bg-white p-6 transition hover:-translate-y-1 hover:border-violet-200 hover:shadow-xl hover:shadow-violet-900/5">
