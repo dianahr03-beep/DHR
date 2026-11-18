@@ -14,5 +14,5 @@ export const negocio = {
   correo: 'dianahr03@gmail.com',
   // Tiempo de entrega (se usa en frases como "Lista en ...")
   tiempoEntrega: 'aproximadamente 4 semanas',
-  tiempoEntregaCorto: 'Unas 4 semanas',
+  tiempoEntregaCorto: 'En 4 semanas',
 }
