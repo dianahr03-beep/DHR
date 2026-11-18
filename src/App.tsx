@@ -603,7 +603,7 @@ function WhatsAppFlotante() {
           <div className="flex items-center gap-3 bg-[#0f2342] px-4 py-3 text-white">
             <div className="grid size-9 place-items-center rounded-full bg-[#1fa855]"><MessageCircle className="size-5" /></div>
             <div className="flex-1">
-              <p className="font-bold leading-tight">DHR</p>
+              <p className="font-bold leading-tight">DHR Calidad</p>
               <p className="text-xs text-white/70">Te respondemos por WhatsApp</p>
             </div>
             <button onClick={() => setAbierto(false)} aria-label="Cerrar chat" className="rounded-full p-1 text-white/80 hover:bg-white/10 hover:text-white"><X className="size-5" /></button>
