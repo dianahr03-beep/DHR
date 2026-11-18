@@ -1,7 +1,7 @@
-# Página de venta — Hazlo Fácil
+# Página de venta — DHR
 
 ## Cambiar textos
-- `src/config.ts`: marca, lema, correo, tiempo de entrega y los planes.
+- `src/config.ts`: marca, lema, correo y tiempo de entrega.
 - `index.html`: título que aparece en la pestaña del navegador.
 
 ## Probar en tu computadora
