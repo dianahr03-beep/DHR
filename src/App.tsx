@@ -2,7 +2,7 @@ import { useState } from 'react'
 import {
   ArrowRight, BarChart3, Building2, Check, CheckCircle2, Clock, Database, FileSpreadsheet,
   FolderKanban, Hourglass, LayoutDashboard, Lock, Mail, Menu, MessageCircle, Palette,
-  Rocket, Scale, ShieldCheck, Smartphone, Sparkles, Stethoscope, Send, Users, X, Zap, FileWarning, Repeat,
+  Rocket, Scale, ShieldCheck, Smartphone, Sparkles, Stethoscope, Globe, Send, Users, X, Zap, FileWarning, Repeat,
 } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion'
@@ -106,7 +106,7 @@ function Hero() {
   return (
     <section id="inicio" className="relative overflow-hidden bg-gradient-to-b from-violet-50 via-white to-white">
       <div aria-hidden className="pointer-events-none absolute -top-40 left-1/2 h-[600px] w-[1100px] -translate-x-1/2 rounded-full bg-gradient-to-r from-violet-300/40 via-fuchsia-300/30 to-orange-200/40 blur-3xl" />
-      <div className="relative mx-auto grid max-w-7xl items-center gap-14 px-4 pt-14 pb-20 sm:px-6 lg:grid-cols-[1.05fr_1fr] lg:pt-20 lg:pb-28">
+      <div className="relative mx-auto grid max-w-7xl items-center gap-14 px-4 pt-8 pb-20 sm:px-6 lg:grid-cols-[1.05fr_1fr] lg:pt-10 lg:pb-28">
         <div>
           <span className="inline-flex items-center gap-2 rounded-full border border-violet-200 bg-white px-4 py-1.5 text-sm font-semibold text-violet-700 shadow-sm">
             <Sparkles className="size-4" /> Aplicaciones para tu empresa
@@ -119,7 +119,11 @@ function Hero() {
           <p className="mt-6 max-w-xl text-lg leading-relaxed text-slate-600 sm:text-xl">
             Creamos la app de tu empresa a la medida: tu información en un solo lugar, reportes en un clic y todo desde la computadora o el celular. Lista en {negocio.tiempoEntrega}, dependiendo del volumen de tus requerimientos, y a un costo accesible.
           </p>
-          <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+          <a href="#contacto" className="group mt-5 flex max-w-xl items-center gap-3 rounded-2xl border border-orange-200 bg-orange-50/80 px-4 py-3 text-slate-700 transition hover:border-orange-300 hover:bg-orange-50">
+            <span className="grid size-10 shrink-0 place-items-center rounded-xl bg-orange-500 text-white"><Globe className="size-5" /></span>
+            <span className="text-[15px] leading-snug sm:text-base"><b className="text-slate-900">¿También necesitas página web?</b> Te hacemos una como esta para impulsar tu empresa y tus ventas.</span>
+          </a>
+          <div className="mt-7 flex flex-col gap-3 sm:flex-row">
             <Button asChild size="lg" variant="accent"><a href="#contacto">Quiero mi app <ArrowRight /></a></Button>
             <Button asChild size="lg" variant="outline"><a href="#demo">Ver un ejemplo real</a></Button>
           </div>
@@ -241,6 +245,7 @@ function QueIncluye() {
     { icon: Lock, c: 'bg-sky-100 text-sky-600', t: 'Usuarios y permisos', d: 'El dueño ve todo; cada empleado ve solo lo suyo. Con usuario y contraseña.' },
     { icon: LayoutDashboard, c: 'bg-indigo-100 text-indigo-600', t: 'Tablero de control', d: 'Los números de tu empresa en una sola pantalla: lo que va bien y lo urgente.' },
     { icon: Rocket, c: 'bg-fuchsia-100 text-fuchsia-600', t: 'Publicada y con soporte', d: 'Te la entregamos funcionando en internet, y la mantenemos al día.' },
+    { icon: Globe, c: 'bg-orange-100 text-orange-600', t: 'Tu página web', d: 'También te hacemos una página como esta para atraer clientes e impulsar tus ventas.' },
   ]
   return (
     <section className="bg-slate-50 py-24">
