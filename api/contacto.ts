@@ -10,7 +10,7 @@ type Datos = Record<string, string | undefined>
 
 const limpiar = (v: unknown, max = 600) => String(v ?? '').replace(/[<>]/g, '').trim().slice(0, max)
 
-export default async function handler(req: { method?: string; body?: unknown }, res: {
+export default async function handler(req: { method?: string; body?: unknown; headers?: Record<string, string | string[] | undefined> }, res: {
   status: (n: number) => { json: (b: unknown) => void }
 }) {
   if (req.method !== 'POST') return res.status(405).json({ ok: false })
@@ -33,18 +33,39 @@ export default async function handler(req: { method?: string; body?: unknown }, 
     hour: 'numeric', minute: '2-digit', hour12: true,
   }).format(new Date())
 
+  // Ubicación aproximada y dispositivo (Vercel los da por la conexión del visitante)
+  const h = (k: string) => {
+    const v = req.headers?.[k]
+    return limpiar(decodeURIComponent(String(Array.isArray(v) ? v[0] : v ?? '')), 80)
+  }
+  const codigoPais = h('x-vercel-ip-country')
+  let paisIp = codigoPais
+  try {
+    if (codigoPais) paisIp = new Intl.DisplayNames(['es'], { type: 'region' }).of(codigoPais) ?? codigoPais
+  } catch { /* deja el código */ }
+  const ubicacion = [h('x-vercel-ip-city'), h('x-vercel-ip-country-region'), paisIp].filter(Boolean).join(', ')
+  const ua = h('user-agent').toLowerCase()
+  const dispositivo = !ua ? '' : /ipad|tablet/.test(ua) ? 'Tableta'
+    : /iphone/.test(ua) ? 'Celular (iPhone)'
+    : /android.*mobile|mobile/.test(ua) ? 'Celular (Android)'
+    : /android/.test(ua) ? 'Tableta (Android)'
+    : /mac os/.test(ua) ? 'Computadora (Mac)'
+    : /windows/.test(ua) ? 'Computadora (Windows)' : 'Computadora'
+
   const SEP = '<sep>'
   const texto = [
     '🔔 *Nuevo cliente interesado*',
     `🕒 ${fecha}`,
     d.origen && `📍 Llegó por: ${d.origen}`,
+    ubicacion && `🗺️ Desde: ${ubicacion} (aprox.)`,
+    dispositivo && `💻 Dispositivo: ${dispositivo}`,
     SEP,
     `👤 *Nombre:* ${d.nombre}`,
     `📱 *WhatsApp:* ${d.telefono}`,
     d.correo && `✉️ *Correo:* ${d.correo}`,
     d.empresa && `🏢 *Empresa:* ${d.empresa}`,
     d.giro && `💼 *Giro:* ${d.giro}`,
-    d.pais && `🌎 *País:* ${d.pais}`,
+    d.pais && `🌎 *País (lo escribió):* ${d.pais}`,
     d.mensaje && `\n💬 *Mensaje:*\n${d.mensaje}`,
     SEP,
     `👉 Responder: https://wa.me/${d.telefono.replace(/\D/g, '')}`,

@@ -448,7 +448,12 @@ async function enviarContacto(d: DatosContacto, origen: string) {
     await new Promise((r) => setTimeout(r, 600))
     return true
   }
+  const fecha = new Intl.DateTimeFormat('es-MX', {
+    timeZone: 'America/Mexico_City', weekday: 'long', day: 'numeric', month: 'long', year: 'numeric',
+    hour: 'numeric', minute: '2-digit', hour12: true,
+  }).format(new Date())
   const texto = [
+    `Fecha: ${fecha}`,
     `Origen: ${origen}`,
     `Nombre: ${d.nombre}`,
     `WhatsApp: ${d.telefono}`,
