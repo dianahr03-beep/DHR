@@ -117,7 +117,7 @@ function Hero() {
             <span className="mt-3 block text-2xl font-bold tracking-tight text-slate-700 sm:text-3xl lg:text-[2.1rem]">con la más alta productividad</span>
           </h1>
           <p className="mt-6 max-w-xl text-lg leading-relaxed text-slate-600 sm:text-xl">
-            Creamos la app de tu negocio a la medida: tu información en un solo lugar, reportes en un clic y todo desde la computadora o el celular. Lista en {negocio.tiempoEntrega} y a un costo accesible.
+            Creamos la app de tu negocio a la medida: tu información en un solo lugar, reportes en un clic y todo desde la computadora o el celular. Lista en {negocio.tiempoEntrega}, dependiendo de tus requerimientos, y a un costo accesible.
           </p>
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">
             <Button asChild size="lg" variant="accent"><a href="#contacto">Quiero mi app <ArrowRight /></a></Button>
