@@ -42,21 +42,21 @@ function Logo({ light = false }: { light?: boolean }) {
 function Header() {
   const [abierto, setAbierto] = useState(false)
   return (
-    <header className="sticky top-0 z-50 border-b border-slate-200/70 bg-white/80 backdrop-blur-lg">
-      <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6">
-        <Logo />
+    <header className="sticky top-0 z-50 border-b border-white/10 bg-[#0f2342] shadow-lg shadow-slate-900/10">
+      <div className="mx-auto flex h-[72px] max-w-7xl items-center justify-between px-4 sm:px-6">
+        <Logo light />
         <nav className="hidden items-center gap-1 lg:flex" aria-label="Principal">
           {enlaces.map((e) => (
-            <a key={e.href} href={e.href} className="rounded-full px-4 py-2 text-[15px] font-medium text-slate-600 hover:bg-violet-50 hover:text-violet-700">
+            <a key={e.href} href={e.href} className="rounded-full px-4 py-2 text-[15px] font-medium text-slate-200 hover:bg-white/10 hover:text-white">
               {e.label}
             </a>
           ))}
         </nav>
         <div className="hidden lg:block">
-          <Button asChild size="sm"><a href="#contacto">Quiero mi app <ArrowRight /></a></Button>
+          <Button asChild size="sm" variant="accent"><a href="#contacto">Quiero mi app <ArrowRight /></a></Button>
         </div>
         <button
-          className="grid size-10 place-items-center rounded-full text-slate-700 hover:bg-slate-100 lg:hidden"
+          className="grid size-10 place-items-center rounded-full text-white hover:bg-white/10 lg:hidden"
           onClick={() => setAbierto(!abierto)}
           aria-label={abierto ? 'Cerrar menú' : 'Abrir menú'}
           aria-expanded={abierto}
@@ -65,13 +65,13 @@ function Header() {
         </button>
       </div>
       {abierto && (
-        <nav className="border-t border-slate-200 bg-white px-4 py-4 lg:hidden" aria-label="Móvil">
+        <nav className="border-t border-white/10 bg-[#0f2342] px-4 py-4 lg:hidden" aria-label="Móvil">
           {enlaces.map((e) => (
-            <a key={e.href} href={e.href} onClick={() => setAbierto(false)} className="block rounded-xl px-4 py-3 font-medium text-slate-700 hover:bg-violet-50">
+            <a key={e.href} href={e.href} onClick={() => setAbierto(false)} className="block rounded-xl px-4 py-3 font-medium text-slate-100 hover:bg-white/10">
               {e.label}
             </a>
           ))}
-          <Button asChild className="mt-3 w-full"><a href="#contacto" onClick={() => setAbierto(false)}>Quiero mi app</a></Button>
+          <Button asChild variant="accent" className="mt-3 w-full"><a href="#contacto" onClick={() => setAbierto(false)}>Quiero mi app</a></Button>
         </nav>
       )}
     </header>
@@ -537,16 +537,16 @@ function Contacto() {
 
 function Footer() {
   return (
-    <footer className="border-t border-slate-200 bg-white">
+    <footer className="bg-[#0f2342]">
       <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-6 px-4 py-10 sm:px-6 md:flex-row">
         <div className="text-center md:text-left">
-          <Logo />
-          <p className="mt-2 text-sm text-slate-500">{negocio.lema}</p>
+          <Logo light />
+          <p className="mt-3 text-sm text-slate-300">{negocio.lema}</p>
         </div>
-        <nav className="flex flex-wrap justify-center gap-x-6 gap-y-2 text-sm font-medium text-slate-600" aria-label="Pie de página">
-          {enlaces.map((e) => <a key={e.href} href={e.href} className="hover:text-violet-700">{e.label}</a>)}
+        <nav className="flex flex-wrap justify-center gap-x-6 gap-y-2 text-sm font-medium text-slate-200" aria-label="Pie de página">
+          {enlaces.map((e) => <a key={e.href} href={e.href} className="hover:text-orange-300">{e.label}</a>)}
         </nav>
-        <p className="text-sm text-slate-500">© {new Date().getFullYear()} {negocio.marca}</p>
+        <p className="text-sm text-slate-400">© {new Date().getFullYear()} {negocio.marca}</p>
       </div>
     </footer>
   )
