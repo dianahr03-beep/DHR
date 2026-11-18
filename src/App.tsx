@@ -109,15 +109,15 @@ function Hero() {
       <div className="relative mx-auto grid max-w-7xl items-center gap-14 px-4 pt-14 pb-20 sm:px-6 lg:grid-cols-[1.05fr_1fr] lg:pt-20 lg:pb-28">
         <div>
           <span className="inline-flex items-center gap-2 rounded-full border border-violet-200 bg-white px-4 py-1.5 text-sm font-semibold text-violet-700 shadow-sm">
-            <Sparkles className="size-4" /> Aplicaciones para tu negocio
+            <Sparkles className="size-4" /> Aplicaciones para tu empresa
           </span>
           <h1 className="mt-6 text-4xl font-extrabold leading-[1.08] tracking-tight text-slate-900 sm:text-5xl lg:text-6xl">
-            Tu negocio{' '}
+            Tu empresa{' '}
             <span className="bg-gradient-to-r from-violet-600 via-fuchsia-500 to-orange-500 bg-clip-text text-transparent">bajo tu control</span>
             <span className="mt-3 block text-2xl font-bold tracking-tight text-slate-700 sm:text-3xl lg:text-[2.1rem]">con la más alta productividad</span>
           </h1>
           <p className="mt-6 max-w-xl text-lg leading-relaxed text-slate-600 sm:text-xl">
-            Creamos la app de tu negocio a la medida: tu información en un solo lugar, reportes en un clic y todo desde la computadora o el celular. Lista en {negocio.tiempoEntrega}, dependiendo del volumen de tus requerimientos, y a un costo accesible.
+            Creamos la app de tu empresa a la medida: tu información en un solo lugar, reportes en un clic y todo desde la computadora o el celular. Lista en {negocio.tiempoEntrega}, dependiendo del volumen de tus requerimientos, y a un costo accesible.
           </p>
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">
             <Button asChild size="lg" variant="accent"><a href="#contacto">Quiero mi app <ArrowRight /></a></Button>
@@ -200,8 +200,8 @@ function ProblemaSolucion() {
       <div className="mx-auto max-w-7xl px-4 sm:px-6">
         <Titulo
           etiqueta="El problema"
-          titulo={<>Tu negocio crece, pero la administración <span className="text-violet-600">te come el día</span></>}
-          sub="Las grandes empresas tienen sistemas hechos a su medida. Los negocios pequeños y medianos normalmente no, porque son caros y tardados. Nosotros cambiamos eso."
+          titulo={<>Tu empresa crece, pero la administración <span className="text-violet-600">te come el día</span></>}
+          sub="Las grandes empresas tienen sistemas hechos a su medida. Las empresas pequeñas y medianas normalmente no, porque son caros y tardados. Nosotros cambiamos eso."
         />
         <div className="mt-16 grid gap-6 lg:grid-cols-2">
           <div className="rounded-3xl border border-red-100 bg-red-50/60 p-8">
@@ -239,13 +239,13 @@ function QueIncluye() {
     { icon: BarChart3, c: 'bg-orange-100 text-orange-600', t: 'Reportes automáticos', d: 'Reportes diarios, semanales o por estatus, listos para descargar en Excel.' },
     { icon: Smartphone, c: 'bg-emerald-100 text-emerald-600', t: 'Versión para celular', d: 'Funciona en cualquier teléfono, tableta o computadora. Sin instalar nada.' },
     { icon: Lock, c: 'bg-sky-100 text-sky-600', t: 'Usuarios y permisos', d: 'El dueño ve todo; cada empleado ve solo lo suyo. Con usuario y contraseña.' },
-    { icon: LayoutDashboard, c: 'bg-indigo-100 text-indigo-600', t: 'Tablero de control', d: 'Los números de tu negocio en una sola pantalla: lo que va bien y lo urgente.' },
+    { icon: LayoutDashboard, c: 'bg-indigo-100 text-indigo-600', t: 'Tablero de control', d: 'Los números de tu empresa en una sola pantalla: lo que va bien y lo urgente.' },
     { icon: Rocket, c: 'bg-fuchsia-100 text-fuchsia-600', t: 'Publicada y con soporte', d: 'Te la entregamos funcionando en internet, y la mantenemos al día.' },
   ]
   return (
     <section className="bg-slate-50 py-24">
       <div className="mx-auto max-w-7xl px-4 sm:px-6">
-        <Titulo etiqueta="Qué incluye" titulo="Una aplicación completa, diseñada para tu negocio" sub="Todo lo que necesitas en un sistema profesional, hecho completamente a la medida de tu negocio." ancho />
+        <Titulo etiqueta="Qué incluye" titulo="Una aplicación completa, diseñada para tu empresa" sub="Todo lo que necesitas en un sistema profesional, hecho completamente a la medida de tu empresa." ancho />
         <div className="mt-16 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
           {items.map(({ icon: I, c, t, d }) => (
             <div key={t} className="group rounded-3xl border border-slate-200 bg-white p-6 transition hover:-translate-y-1 hover:border-violet-200 hover:shadow-xl hover:shadow-violet-900/5">
@@ -282,7 +282,7 @@ function Industrias() {
     },
     {
       id: 'otros', icon: FolderKanban, nombre: 'Tu giro', color: 'from-sky-500 to-violet-600',
-      titulo: '¿Tu negocio es diferente? Mejor',
+      titulo: '¿Tu empresa es diferente? Mejor',
       texto: 'Contadores, inmobiliarias, escuelas, talleres, constructoras… Si hoy lo llevas en Excel o en libreta, lo podemos convertir en app.',
       puntos: ['Platicamos cómo trabajas hoy', 'Diseñamos las pantallas contigo', 'Tus reportes, como los necesitas', 'Crece cuando tú creces'],
     },
@@ -290,7 +290,7 @@ function Industrias() {
   return (
     <section id="industrias" className="py-24">
       <div className="mx-auto max-w-7xl px-4 sm:px-6">
-        <Titulo etiqueta="Para quién" titulo="Hecha para tu tipo de negocio" sub="Cada app se diseña a partir de cómo trabajas tú, no al revés." />
+        <Titulo etiqueta="Para quién" titulo="Hecha para tu tipo de empresa" sub="Cada app se diseña a partir de cómo trabajas tú, no al revés." />
         <Tabs defaultValue="abogados" className="mt-12">
           <div className="flex justify-center">
             <TabsList>
@@ -374,7 +374,7 @@ function ComoFunciona() {
   return (
     <section className="py-24">
       <div className="mx-auto max-w-7xl px-4 sm:px-6">
-        <Titulo etiqueta="Cómo funciona" titulo="Danos tu idea para tu aplicación en 4 pasos" sub="Sin tecnicismos. Tú nos cuentas tu negocio; nosotros nos encargamos de lo demás." />
+        <Titulo etiqueta="Cómo funciona" titulo="Danos tu idea para tu aplicación en 4 pasos" sub="Sin tecnicismos. Tú nos cuentas tu empresa; nosotros nos encargamos de lo demás." />
         <ol className="relative mt-16 grid gap-8 md:grid-cols-2 lg:grid-cols-4">
           <div aria-hidden className="absolute left-0 right-0 top-8 hidden h-0.5 bg-gradient-to-r from-violet-200 via-fuchsia-200 to-orange-200 lg:block" />
           {pasos.map(({ n, icon: I, t, d }) => (
@@ -400,7 +400,7 @@ function Cotiza() {
         <div className="flex flex-col items-center gap-5 rounded-3xl border border-violet-200 bg-white p-8 text-center shadow-xl shadow-violet-900/5 sm:p-14">
           <p className="text-sm font-bold uppercase tracking-widest text-violet-600">Cotiza tu proyecto</p>
           <h2 className="text-3xl font-extrabold tracking-tight text-slate-900 sm:text-4xl lg:text-5xl">Cotización sin costo y sin compromiso</h2>
-          <p className="max-w-2xl text-lg text-slate-600">Platicamos de tu negocio, entendemos qué necesitas y te damos un precio claro y accesible antes de empezar. Incluye soporte después de la entrega.</p>
+          <p className="max-w-2xl text-lg text-slate-600">Platicamos de tu empresa, entendemos qué necesitas y te damos un precio claro y accesible antes de empezar. Incluye soporte después de la entrega.</p>
           <Button asChild size="lg" variant="accent"><a href="#contacto">Cotizar mi proyecto <ArrowRight /></a></Button>
         </div>
       </div>
@@ -414,8 +414,8 @@ function Preguntas() {
     { p: '¿Cuánto tiempo tarda?', r: `Normalmente ${negocio.tiempoEntrega}, según lo que necesite tu proyecto. Te damos una fecha clara desde el inicio.` },
     { p: '¿Funciona en el celular?', r: 'Sí. Tu app se abre desde el navegador de cualquier celular, tableta o computadora, sin instalar nada.' },
     { p: '¿Mi información está segura?', r: 'Sí. Cada persona entra con su usuario y contraseña, solo ve lo que le corresponde, y la información se guarda en la nube con respaldos.' },
-    { p: '¿Puedo pedir cambios después?', r: 'Claro. Tu app crece con tu negocio: puedes agregar pantallas, reportes o usuarios cuando lo necesites.' },
-    { p: '¿Trabajan con negocios fuera de mi país?', r: 'Sí. Trabajamos de forma remota, por videollamada y WhatsApp, así que podemos atenderte donde estés.' },
+    { p: '¿Puedo pedir cambios después?', r: 'Claro. Tu app crece con tu empresa: puedes agregar pantallas, reportes o usuarios cuando lo necesites.' },
+    { p: '¿Trabajan con empresas fuera de mi país?', r: 'Sí. Trabajamos de forma remota, por videollamada y WhatsApp, así que podemos atenderte donde estés.' },
     { p: '¿Puedo pasar mis datos de Excel?', r: 'Sí. Te ayudamos a cargar tu información actual para que empieces a usar la app desde el primer día.' },
   ]
   return (
@@ -506,7 +506,7 @@ function Contacto() {
                 <input type="email" value={form.correo} onChange={set('correo')} className={input} placeholder="tu@correo.com" autoComplete="email" />
               </label>
               <label className="text-sm font-semibold text-slate-700">Empresa
-                <input value={form.empresa} onChange={set('empresa')} className={input} placeholder="Nombre del negocio" autoComplete="organization" />
+                <input value={form.empresa} onChange={set('empresa')} className={input} placeholder="Nombre de la empresa" autoComplete="organization" />
               </label>
               <label className="text-sm font-semibold text-slate-700">Giro
                 <select value={form.giro} onChange={set('giro')} className={input}>
