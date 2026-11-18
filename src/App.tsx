@@ -20,13 +20,20 @@ const enlaces = [
 ]
 
 function Logo({ light = false }: { light?: boolean }) {
+  const letras = light ? 'text-white' : 'text-[#0f2342]'
   return (
-    <a href="#inicio" className="flex items-center gap-2.5">
-      <span className="grid size-9 place-items-center rounded-xl bg-gradient-to-br from-violet-600 via-fuchsia-500 to-orange-400 text-white shadow-md">
-        <Sparkles className="size-5" />
+    <a href="#inicio" className="flex flex-col items-center leading-none" aria-label={`${negocio.marca} · ${negocio.nombreCompleto}`}>
+      <span className="flex items-center gap-1.5">
+        <span className="flex flex-col items-end gap-[3px]" aria-hidden>
+          <i className="block h-[2.5px] w-3.5 rounded-full bg-gradient-to-r from-transparent to-orange-400" />
+          <i className="block h-[2.5px] w-6 rounded-full bg-gradient-to-r from-transparent to-orange-400" />
+          <i className="block h-[2.5px] w-2.5 rounded-full bg-gradient-to-r from-transparent to-orange-400" />
+        </span>
+        <span className={cn('pl-[4px] font-serif text-[30px] font-semibold tracking-[6px]', letras)}>{negocio.marca}</span>
+        <svg className="-ml-1 mb-3 size-3 text-orange-400" viewBox="0 0 24 24" aria-hidden><path fill="currentColor" d="M12 1l2.6 8.4L23 12l-8.4 2.6L12 23l-2.6-8.4L1 12l8.4-2.6z" /></svg>
       </span>
-      <span className={cn('text-xl font-extrabold tracking-tight', light ? 'text-white' : 'text-slate-900')}>
-        {negocio.marca}
+      <span className={cn('mt-0.5 font-serif text-[9.5px] font-semibold uppercase tracking-[2px]', light ? 'text-slate-300' : 'text-[#0f2342]/80')}>
+        {negocio.nombreCompleto}
       </span>
     </a>
   )

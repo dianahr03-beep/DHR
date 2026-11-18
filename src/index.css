@@ -2,6 +2,7 @@
 
 @theme {
   --font-sans: 'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif;
+  --font-serif: 'Cormorant Garamond', Georgia, serif;
   --animate-down: acc-down 0.2s ease-out;
   --animate-up: acc-up 0.2s ease-out;
   --animate-float: float 6s ease-in-out infinite;
