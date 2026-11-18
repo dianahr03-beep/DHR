@@ -473,7 +473,7 @@ function Contacto() {
       <div className="relative mx-auto grid max-w-7xl overflow-hidden rounded-[2rem] bg-gradient-to-br from-violet-700 via-fuchsia-600 to-orange-500 lg:grid-cols-2">
         <div aria-hidden className="pointer-events-none absolute -left-20 -top-20 size-80 rounded-full bg-white/10 blur-2xl" />
         <div className="relative p-8 text-white sm:p-12 lg:p-16">
-          <h2 className="text-balance text-3xl font-extrabold tracking-tight sm:text-5xl">¿Listo para recuperar tu tiempo y tener el control de tu aplicación?</h2>
+          <h2 className="text-balance text-3xl font-extrabold tracking-tight sm:text-5xl">¿Listo para recuperar tu tiempo y tener el control con tu aplicación?</h2>
           <p className="mt-5 text-lg text-white/90">Déjanos tus datos y te escribimos por WhatsApp o por correo. La primera asesoría es gratis.</p>
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">
             <Button asChild size="lg" variant="light"><a href={`mailto:${negocio.correo}`}><Mail /> Escríbenos por correo</a></Button>
