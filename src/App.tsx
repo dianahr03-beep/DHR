@@ -2,7 +2,7 @@ import { useState } from 'react'
 import {
   ArrowRight, BarChart3, Building2, Check, CheckCircle2, Clock, Database, FileSpreadsheet,
   FolderKanban, Hourglass, LayoutDashboard, Lock, Mail, Menu, MessageCircle, Palette,
-  Rocket, Scale, ShieldCheck, Smartphone, Sparkles, Stethoscope, Users, X, Zap, FileWarning, Repeat,
+  Rocket, Scale, ShieldCheck, Smartphone, Sparkles, Stethoscope, Send, Users, X, Zap, FileWarning, Repeat,
 } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion'
@@ -435,6 +435,46 @@ function Preguntas() {
   )
 }
 
+type DatosContacto = { nombre: string; telefono: string; correo?: string; empresa?: string; giro?: string; pais?: string; mensaje?: string }
+
+// Manda los datos a tu correo (Web3Forms) y a tu WhatsApp (función de Vercel). Tu número nunca está en la página.
+async function enviarContacto(d: DatosContacto, origen: string) {
+  if (import.meta.env.VITE_DEMO) {
+    await new Promise((r) => setTimeout(r, 600))
+    return true
+  }
+  const texto = [
+    `Origen: ${origen}`,
+    `Nombre: ${d.nombre}`,
+    `WhatsApp: ${d.telefono}`,
+    d.correo && `Correo: ${d.correo}`,
+    d.empresa && `Empresa: ${d.empresa}`,
+    d.giro && `Giro: ${d.giro}`,
+    d.pais && `País: ${d.pais}`,
+    d.mensaje && `Mensaje: ${d.mensaje}`,
+    `Responder por WhatsApp: https://wa.me/${d.telefono.replace(/\D/g, '')}`,
+  ].filter(Boolean).join('\n')
+  const [correoOk, whatsOk] = await Promise.all([
+    fetch('https://api.web3forms.com/submit', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+      body: JSON.stringify({
+        access_key: negocio.web3formsKey,
+        subject: `Nuevo cliente: ${d.nombre}${d.empresa ? ` (${d.empresa})` : ''}`,
+        from_name: 'Página DHR',
+        replyto: d.correo || undefined,
+        message: texto,
+      }),
+    }).then((r) => r.ok).catch(() => false),
+    fetch('/api/contacto', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ giro: '', ...d }),
+    }).then((r) => r.ok).catch(() => false),
+  ])
+  return correoOk || whatsOk
+}
+
 function Contacto() {
   const vacio = { nombre: '', empresa: '', giro: 'Abogados', pais: '', telefono: '', correo: '', mensaje: '' }
   const [form, setForm] = useState(vacio)
@@ -447,43 +487,7 @@ function Contacto() {
     e.preventDefault()
     setEstado('enviando')
     try {
-      // En la vista previa (archivo de prueba) no hay servidor: simulamos el envío
-      if (import.meta.env.VITE_DEMO) {
-        await new Promise((r) => setTimeout(r, 600))
-        setEstado('ok')
-        setForm(vacio)
-        return
-      }
-      const texto = [
-        `Nombre: ${form.nombre}`,
-        `WhatsApp: ${form.telefono}`,
-        form.correo && `Correo: ${form.correo}`,
-        form.empresa && `Empresa: ${form.empresa}`,
-        `Giro: ${form.giro}`,
-        form.pais && `País: ${form.pais}`,
-        form.mensaje && `Mensaje: ${form.mensaje}`,
-        `Responder por WhatsApp: https://wa.me/${form.telefono.replace(/\D/g, '')}`,
-      ].filter(Boolean).join('\n')
-      // Copia a tu correo (Web3Forms) y aviso a tu WhatsApp (función de Vercel), al mismo tiempo
-      const [correoOk, whatsOk] = await Promise.all([
-        fetch('https://api.web3forms.com/submit', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-          body: JSON.stringify({
-            access_key: negocio.web3formsKey,
-            subject: `Nuevo cliente: ${form.nombre}${form.empresa ? ` (${form.empresa})` : ''}`,
-            from_name: 'Página DHR',
-            replyto: form.correo || undefined,
-            message: texto,
-          }),
-        }).then((r) => r.ok).catch(() => false),
-        fetch('/api/contacto', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(form),
-        }).then((r) => r.ok).catch(() => false),
-      ])
-      if (!correoOk && !whatsOk) throw new Error()
+      if (!(await enviarContacto(form, 'Formulario'))) throw new Error()
       setEstado('ok')
       setForm(vacio)
     } catch {
@@ -578,14 +582,65 @@ function Footer() {
 }
 
 function WhatsAppFlotante() {
+  const [abierto, setAbierto] = useState(false)
+  const vacio = { nombre: '', telefono: '', mensaje: '' }
+  const [d, setD] = useState(vacio)
+  const [estado, setEstado] = useState<'listo' | 'enviando' | 'ok' | 'error'>('listo')
+  const set = (k: keyof typeof d) => (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => setD({ ...d, [k]: e.target.value })
+  const enviar = async (e: React.FormEvent) => {
+    e.preventDefault()
+    setEstado('enviando')
+    const ok = await enviarContacto(d, 'Chat de la página')
+    setEstado(ok ? 'ok' : 'error')
+    if (ok) setD(vacio)
+  }
+  const input = 'w-full rounded-xl border border-slate-300 bg-white px-3 py-2.5 text-sm text-slate-900 placeholder:text-slate-400 focus:border-[#1fa855] focus:outline-none focus:ring-4 focus:ring-green-100'
+
   return (
-    <a
-      href="#contacto"
-      aria-label="Contáctanos por WhatsApp"
-      className="fixed bottom-5 right-5 z-50 grid size-14 place-items-center rounded-full bg-[#1fa855] text-white shadow-xl shadow-green-700/30 transition hover:scale-110"
-    >
-      <MessageCircle className="size-7" />
-    </a>
+    <div className="fixed bottom-5 right-5 z-50 flex flex-col items-end gap-3">
+      {abierto && (
+        <div className="w-[calc(100vw-2.5rem)] max-w-sm overflow-hidden rounded-2xl bg-white shadow-2xl shadow-slate-900/25 ring-1 ring-slate-200">
+          <div className="flex items-center gap-3 bg-[#0f2342] px-4 py-3 text-white">
+            <div className="grid size-9 place-items-center rounded-full bg-[#1fa855]"><MessageCircle className="size-5" /></div>
+            <div className="flex-1">
+              <p className="font-bold leading-tight">DHR</p>
+              <p className="text-xs text-white/70">Te respondemos por WhatsApp</p>
+            </div>
+            <button onClick={() => setAbierto(false)} aria-label="Cerrar chat" className="rounded-full p-1 text-white/80 hover:bg-white/10 hover:text-white"><X className="size-5" /></button>
+          </div>
+          <div className="bg-[#efeae2] p-4">
+            <div className="max-w-[85%] rounded-2xl rounded-tl-sm bg-white px-3 py-2 text-sm text-slate-700 shadow-sm">
+              ¡Hola! 👋 Cuéntanos qué necesitas y te escribimos a tu WhatsApp.
+            </div>
+          </div>
+          {estado === 'ok' ? (
+            <div className="space-y-3 p-5 text-center">
+              <CheckCircle2 className="mx-auto size-10 text-[#1fa855]" />
+              <p className="font-bold text-slate-900">¡Mensaje enviado!</p>
+              <p className="text-sm text-slate-600">Te escribimos muy pronto a tu WhatsApp.</p>
+              <button onClick={() => setEstado('listo')} className="text-sm font-semibold text-[#1fa855] hover:underline">Enviar otro mensaje</button>
+            </div>
+          ) : (
+            <form onSubmit={enviar} className="space-y-2.5 p-4">
+              <input required value={d.nombre} onChange={set('nombre')} className={input} placeholder="Tu nombre" autoComplete="name" />
+              <input required value={d.telefono} onChange={set('telefono')} className={input} placeholder="Tu WhatsApp" type="tel" autoComplete="tel" />
+              <textarea required value={d.mensaje} onChange={set('mensaje')} className={cn(input, 'min-h-20 resize-none')} placeholder="Escribe tu mensaje…" />
+              {estado === 'error' && <p className="text-xs text-red-600">No se pudo enviar. Intenta de nuevo.</p>}
+              <button disabled={estado === 'enviando'} className="flex w-full items-center justify-center gap-2 rounded-xl bg-[#1fa855] py-2.5 font-semibold text-white transition hover:bg-[#178a45] disabled:opacity-60">
+                <Send className="size-4" /> {estado === 'enviando' ? 'Enviando…' : 'Enviar'}
+              </button>
+            </form>
+          )}
+        </div>
+      )}
+      <button
+        onClick={() => setAbierto(!abierto)}
+        aria-label={abierto ? 'Cerrar chat' : 'Escríbenos'}
+        className="grid size-14 place-items-center rounded-full bg-[#1fa855] text-white shadow-xl shadow-green-700/30 transition hover:scale-110"
+      >
+        {abierto ? <X className="size-7" /> : <MessageCircle className="size-7" />}
+      </button>
+    </div>
   )
 }
 
