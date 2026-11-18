@@ -9,10 +9,7 @@ export const negocio = {
   nombreCompleto: 'Diseño Herramientas Rápidas con Calidad',
   // Frase corta debajo del nombre
   lema: 'Ahorra tiempo y haz eficiente tu trabajo',
-  // WhatsApp del botón verde flotante (código de país + número, sin espacios ni +)
-  whatsapp: '525528556252',
-  // Mensaje que aparece ya escrito cuando el cliente abre el chat (lo puede cambiar)
-  mensajeWhatsApp: 'Hola, quiero información sobre una app para mi empresa.',
+  // Tu WhatsApp NO va aquí: se guarda en Vercel (ver LEEME-WHATSAPP.md) para que nadie lo vea.
   // Correo de contacto que se muestra en la página
   correo: 'dianahr03@gmail.com',
   // Clave pública de web3forms.com: manda una copia de cada formulario a tu correo (es pública, puede ir aquí)
