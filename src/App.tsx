@@ -245,7 +245,7 @@ function QueIncluye() {
   return (
     <section className="bg-slate-50 py-24">
       <div className="mx-auto max-w-7xl px-4 sm:px-6">
-        <Titulo etiqueta="Qué incluye" titulo="Una aplicación completa, diseñada para tu negocio" sub="Todo lo que necesita un sistema profesional, hecho para cómo trabaja tu negocio." />
+        <Titulo etiqueta="Qué incluye" titulo="Una aplicación completa, diseñada para tu negocio" sub="Todo lo que necesitas en un sistema profesional, hecho a la medida de tu negocio." />
         <div className="mt-16 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
           {items.map(({ icon: I, c, t, d }) => (
             <div key={t} className="group rounded-3xl border border-slate-200 bg-white p-6 transition hover:-translate-y-1 hover:border-violet-200 hover:shadow-xl hover:shadow-violet-900/5">
