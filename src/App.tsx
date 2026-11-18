@@ -177,7 +177,7 @@ function Titulo({ etiqueta, titulo, sub, light = false }: { etiqueta: string; ti
     <div className="mx-auto max-w-3xl text-center">
       <p className={cn('text-sm font-bold uppercase tracking-widest', light ? 'text-orange-300' : 'text-violet-600')}>{etiqueta}</p>
       <h2 className={cn('mt-3 text-3xl font-extrabold tracking-tight sm:text-4xl lg:text-5xl', light ? 'text-white' : 'text-slate-900')}>{titulo}</h2>
-      {sub && <p className={cn('mt-5 text-lg leading-relaxed', light ? 'text-violet-100' : 'text-slate-600')}>{sub}</p>}
+      {sub && <p className={cn('mt-5 text-balance text-lg leading-relaxed', light ? 'text-violet-100' : 'text-slate-600')}>{sub}</p>}
     </div>
   )
 }
