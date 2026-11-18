@@ -374,7 +374,7 @@ function ComoFunciona() {
   return (
     <section className="py-24">
       <div className="mx-auto max-w-7xl px-4 sm:px-6">
-        <Titulo etiqueta="Cómo funciona" titulo="De la idea a tu app, en 4 pasos" sub="Sin tecnicismos. Tú nos cuentas tu negocio; nosotros nos encargamos de lo demás." />
+        <Titulo etiqueta="Cómo funciona" titulo="De tu idea a una aplicación, en 4 pasos" sub="Sin tecnicismos. Tú nos cuentas tu negocio; nosotros nos encargamos de lo demás." />
         <ol className="relative mt-16 grid gap-8 md:grid-cols-2 lg:grid-cols-4">
           <div aria-hidden className="absolute left-0 right-0 top-8 hidden h-0.5 bg-gradient-to-r from-violet-200 via-fuchsia-200 to-orange-200 lg:block" />
           {pasos.map(({ n, icon: I, t, d }) => (
