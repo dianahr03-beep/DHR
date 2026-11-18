@@ -320,7 +320,7 @@ function Demo() {
   const vistas = [
     { id: 'tablero', label: 'Tablero del dueño', img: '/capturas/1-tablero-dueno.webp', movil: '/capturas/8-celular-tablero.webp', d: 'Apenas entras ves cuántos juicios hay por estatus, la utilidad del despacho y lo que requiere atención.' },
     { id: 'juicios', label: 'Lista de juicios', img: '/capturas/juicios-lista.webp', movil: '/capturas/celular-juicios.webp', d: 'Todos los expedientes con buscador y filtros: quién lo lleva, en qué etapa va y cuál es el siguiente paso.' },
-    { id: 'finanzas', label: 'Detalle y finanzas', img: '/capturas/3-detalle-y-finanzas.webp', movil: null, d: 'Cada caso con su historial y sus números: cobros, gastos, impuestos, comisión y la utilidad real.' },
+    { id: 'finanzas', label: 'Detalle y finanzas', img: '/capturas/finanzas.webp', movil: null, d: 'Registras cobros, gastos, impuestos y comisiones de cada caso, y la app calcula sola la utilidad real.' },
     { id: 'reporte', label: 'Reporte diario', img: '/capturas/4-reporte-diario.webp', movil: null, d: 'El reporte que antes tomaba horas, ahora se genera solo y se descarga en un clic.' },
     { id: 'equipo', label: 'Equipo', img: '/capturas/5-equipo.webp', movil: null, d: 'El dueño da de alta a su equipo y cada abogado entra con su propio usuario.' },
   ]
@@ -340,7 +340,7 @@ function Demo() {
             <TabsContent key={v.id} value={v.id} className="mt-10">
               <p className="mx-auto mb-8 max-w-2xl text-center text-lg text-violet-100">{v.d}</p>
               <div className="relative mx-auto max-w-5xl">
-                <BrowserFrame src={v.img} alt={`Pantalla: ${v.label}`} className="max-h-[620px] [&_img]:object-cover [&_img]:object-top" />
+                <BrowserFrame src={v.img} alt={`Pantalla: ${v.label}`} className="max-h-[760px] [&_img]:object-cover [&_img]:object-top" />
                 {v.movil && (
                   <PhoneFrame src={v.movil} alt={`${v.label} en el celular`} className="absolute -bottom-8 -right-2 hidden w-44 sm:block lg:-right-12" />
                 )}
