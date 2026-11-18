@@ -44,7 +44,20 @@ export default async function handler(req: { method?: string; body?: unknown }, 
 
   if (CALLMEBOT_TELEFONO && CALLMEBOT_APIKEY) {
     const url = `https://api.callmebot.com/whatsapp.php?phone=${encodeURIComponent(CALLMEBOT_TELEFONO)}&apikey=${encodeURIComponent(CALLMEBOT_APIKEY)}&text=${encodeURIComponent(texto)}`
-    envios.push(fetch(url).then((r) => r.ok).catch(() => false))
+    envios.push(
+      fetch(url)
+        .then(async (r) => {
+          const t = await r.text()
+          console.log('CallMeBot respondió:', r.status, t.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').slice(0, 300))
+          return r.ok && !/error|invalid|not/i.test(t)
+        })
+        .catch((e) => {
+          console.log('CallMeBot falló:', String(e))
+          return false
+        }),
+    )
+  } else {
+    console.log('Faltan CALLMEBOT_TELEFONO o CALLMEBOT_APIKEY en Vercel')
   }
   const resultados = await Promise.all(envios)
   if (!resultados.some(Boolean)) return res.status(502).json({ ok: false })
