@@ -24,20 +24,31 @@ export default async function handler(req: { method?: string; body?: unknown }, 
     giro: limpiar(b.giro, 60),
     pais: limpiar(b.pais, 60),
     mensaje: limpiar(b.mensaje),
+    origen: limpiar(b.origen, 40),
   }
   if (!d.nombre || !d.telefono) return res.status(400).json({ ok: false, error: 'Faltan nombre o WhatsApp' })
 
+  const fecha = new Intl.DateTimeFormat('es-MX', {
+    timeZone: 'America/Mexico_City', weekday: 'long', day: 'numeric', month: 'long',
+    hour: 'numeric', minute: '2-digit', hour12: true,
+  }).format(new Date())
+
+  const SEP = '<sep>'
   const texto = [
-    '🔔 Nuevo cliente interesado',
-    `Nombre: ${d.nombre}`,
-    `WhatsApp: ${d.telefono}`,
-    d.correo && `Correo: ${d.correo}`,
-    d.empresa && `Empresa: ${d.empresa}`,
-    `Giro: ${d.giro}`,
-    d.pais && `País: ${d.pais}`,
-    d.mensaje && `Mensaje: ${d.mensaje}`,
-    `Responder: https://wa.me/${d.telefono.replace(/\D/g, '')}`,
-  ].filter(Boolean).join('\n')
+    '🔔 *Nuevo cliente interesado*',
+    `🕒 ${fecha}`,
+    d.origen && `📍 Llegó por: ${d.origen}`,
+    SEP,
+    `👤 *Nombre:* ${d.nombre}`,
+    `📱 *WhatsApp:* ${d.telefono}`,
+    d.correo && `✉️ *Correo:* ${d.correo}`,
+    d.empresa && `🏢 *Empresa:* ${d.empresa}`,
+    d.giro && `💼 *Giro:* ${d.giro}`,
+    d.pais && `🌎 *País:* ${d.pais}`,
+    d.mensaje && `\n💬 *Mensaje:*\n${d.mensaje}`,
+    SEP,
+    `👉 Responder: https://wa.me/${d.telefono.replace(/\D/g, '')}`,
+  ].filter(Boolean).map((x) => (x === SEP ? '' : x)).join('\n')
 
   const envios: Promise<boolean>[] = []
   const { CALLMEBOT_TELEFONO, CALLMEBOT_APIKEY } = process.env

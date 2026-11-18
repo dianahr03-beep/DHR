@@ -474,7 +474,7 @@ async function enviarContacto(d: DatosContacto, origen: string) {
     fetch('/api/contacto', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ giro: '', ...d }),
+      body: JSON.stringify({ giro: '', ...d, origen }),
     }).then((r) => r.ok).catch(() => false),
   ])
   return correoOk || whatsOk
