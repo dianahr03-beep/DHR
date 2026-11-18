@@ -6,7 +6,7 @@ export const negocio = {
   // Nombre de tu marca
   marca: 'DHR',
   // Nombre completo que va debajo del logo
-  nombreCompleto: 'Diseño Herramientas Rápidas',
+  nombreCompleto: 'Diseño Herramientas Rápidas con Calidad',
   // Frase corta debajo del nombre
   lema: 'Ahorra tiempo y haz eficiente tu trabajo',
   // Tu WhatsApp NO va aquí: se guarda en Vercel (ver LEEME-WHATSAPP.md) para que nadie lo vea.
