@@ -1,10 +1,10 @@
-// Función de Vercel: recibe el formulario y te avisa por WhatsApp y por correo.
+// Función de Vercel: recibe el formulario y te avisa por WhatsApp.
 // Tu número y tus claves viven en las "Environment Variables" de Vercel,
 // nunca en el código de la página, así que los visitantes no los pueden ver.
 //
 //   CALLMEBOT_TELEFONO  → tu WhatsApp con código de país, ej. 5215512345678
 //   CALLMEBOT_APIKEY    → la clave que te manda CallMeBot por WhatsApp
-//   WEB3FORMS_KEY       → la clave de web3forms.com (para recibir copia por correo)
+// (La copia por correo la manda la página directamente con la clave de web3forms en src/config.ts)
 
 type Datos = Record<string, string | undefined>
 
@@ -40,27 +40,12 @@ export default async function handler(req: { method?: string; body?: unknown }, 
   ].filter(Boolean).join('\n')
 
   const envios: Promise<boolean>[] = []
-  const { CALLMEBOT_TELEFONO, CALLMEBOT_APIKEY, WEB3FORMS_KEY } = process.env
+  const { CALLMEBOT_TELEFONO, CALLMEBOT_APIKEY } = process.env
 
   if (CALLMEBOT_TELEFONO && CALLMEBOT_APIKEY) {
     const url = `https://api.callmebot.com/whatsapp.php?phone=${encodeURIComponent(CALLMEBOT_TELEFONO)}&apikey=${encodeURIComponent(CALLMEBOT_APIKEY)}&text=${encodeURIComponent(texto)}`
     envios.push(fetch(url).then((r) => r.ok).catch(() => false))
   }
-  if (WEB3FORMS_KEY) {
-    envios.push(
-      fetch('https://api.web3forms.com/submit', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-        body: JSON.stringify({
-          access_key: WEB3FORMS_KEY,
-          subject: `Nuevo cliente: ${d.nombre}${d.empresa ? ` (${d.empresa})` : ''}`,
-          from_name: 'Página de ventas',
-          message: texto,
-        }),
-      }).then((r) => r.ok).catch(() => false),
-    )
-  }
-
   const resultados = await Promise.all(envios)
   if (!resultados.some(Boolean)) return res.status(502).json({ ok: false })
   return res.status(200).json({ ok: true })

@@ -8,8 +8,8 @@ con su nombre y su WhatsApp. Tu número nunca aparece en la página: se guarda e
 2. Mándale por WhatsApp el mensaje que indica esa página ("I allow callmebot to send me messages").
 3. Te responde con tu **apikey** (un número).
 
-## 2. Correo (Web3Forms, gratis)
-1. Entra a https://web3forms.com, escribe tu correo y te llega tu **Access Key**.
+## 2. Correo (Web3Forms, gratis) — YA ACTIVADO
+La clave pública de Web3Forms ya está en `src/config.ts` (web3formsKey). Cada formulario te llega a dianahr03@gmail.com.
 
 ## 3. Guardar los datos en Vercel
 En tu proyecto de Vercel → Settings → Environment Variables, agrega:
@@ -18,7 +18,6 @@ En tu proyecto de Vercel → Settings → Environment Variables, agrega:
 |----------------------|-----------------------------------------|
 | CALLMEBOT_TELEFONO   | tu WhatsApp con código de país, ej. +52XXXXXXXXXX (si no llega, prueba con +521XXXXXXXXXX) |
 | CALLMEBOT_APIKEY     | la apikey de CallMeBot                  |
-| WEB3FORMS_KEY        | la Access Key de Web3Forms              |
 
 Después haz "Redeploy". Llena el formulario tú misma para probar.
 

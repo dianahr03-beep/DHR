@@ -454,12 +454,36 @@ function Contacto() {
         setForm(vacio)
         return
       }
-      const r = await fetch('/api/contacto', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(form),
-      })
-      if (!r.ok) throw new Error()
+      const texto = [
+        `Nombre: ${form.nombre}`,
+        `WhatsApp: ${form.telefono}`,
+        form.correo && `Correo: ${form.correo}`,
+        form.empresa && `Empresa: ${form.empresa}`,
+        `Giro: ${form.giro}`,
+        form.pais && `País: ${form.pais}`,
+        form.mensaje && `Mensaje: ${form.mensaje}`,
+        `Responder por WhatsApp: https://wa.me/${form.telefono.replace(/\D/g, '')}`,
+      ].filter(Boolean).join('\n')
+      // Copia a tu correo (Web3Forms) y aviso a tu WhatsApp (función de Vercel), al mismo tiempo
+      const [correoOk, whatsOk] = await Promise.all([
+        fetch('https://api.web3forms.com/submit', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+          body: JSON.stringify({
+            access_key: negocio.web3formsKey,
+            subject: `Nuevo cliente: ${form.nombre}${form.empresa ? ` (${form.empresa})` : ''}`,
+            from_name: 'Página DHR',
+            replyto: form.correo || undefined,
+            message: texto,
+          }),
+        }).then((r) => r.ok).catch(() => false),
+        fetch('/api/contacto', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(form),
+        }).then((r) => r.ok).catch(() => false),
+      ])
+      if (!correoOk && !whatsOk) throw new Error()
       setEstado('ok')
       setForm(vacio)
     } catch {
