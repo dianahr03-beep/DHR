@@ -159,7 +159,7 @@ function Franja() {
     { icon: Clock, t: negocio.tiempoEntregaCorto, d: 'proyectos grandes, por etapas' },
     { icon: Smartphone, t: 'Computadora y celular', d: 'una sola app, en todos lados' },
     { icon: Users, t: 'Para todo tu equipo', d: 'cada quien ve lo que le toca' },
-    { icon: ShieldCheck, t: 'Datos seguros', d: 'respaldados en la nube' },
+    { icon: ShieldCheck, t: 'Datos seguros', d: 'privados y protegidos' },
   ]
   return (
     <section className="bg-slate-950">
