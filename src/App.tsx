@@ -272,6 +272,7 @@ function Industrias() {
       titulo: 'Control de juicios y cobros para tu despacho',
       texto: 'Sabe en qué va cada expediente, quién lo lleva, cuál es el siguiente paso y cuánto deja cada caso.',
       puntos: ['Expedientes con su historial de movimientos', 'Siguiente paso de cada caso', 'Cobros, gastos, impuestos y comisiones', 'Reporte diario por estatus'],
+      img: '/capturas/1-tablero-dueno.webp', movil: '/capturas/8-celular-tablero.webp',
     },
     {
       id: 'doctores', icon: Stethoscope, nombre: 'Doctores y clínicas', color: 'from-emerald-500 to-teal-600',
@@ -304,11 +305,18 @@ function Industrias() {
               ))}
             </TabsList>
           </div>
-          {lista.map(({ id, icon: I, color, titulo, texto, puntos }) => (
+          {lista.map(({ id, icon: I, color, titulo, texto, puntos, img, movil }: { id: string; icon: typeof Scale; color: string; titulo: string; texto: string; puntos: string[]; img?: string; movil?: string }) => (
             <TabsContent key={id} value={id} className="mt-10">
               <div className="grid overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-xl shadow-slate-900/5 lg:grid-cols-[1fr_1.1fr]">
-                <div className={cn('relative flex min-h-[220px] items-center justify-center bg-gradient-to-br p-10', color)}>
-                  <I className="size-28 text-white/90 sm:size-36" strokeWidth={1.3} />
+                <div className={cn('relative flex min-h-[220px] items-center justify-center bg-gradient-to-br', img ? 'p-6 pb-10 sm:p-10 sm:pb-14' : 'p-10', color)}>
+                  {img ? (
+                    <>
+                      <BrowserFrame src={img} alt={`App de ${titulo.toLowerCase()}`} className="w-full" />
+                      {movil && <PhoneFrame src={movil} alt="La app en el celular" className="absolute bottom-4 right-4 w-[24%] min-w-[90px] sm:right-6" />}
+                    </>
+                  ) : (
+                    <I className="size-28 text-white/90 sm:size-36" strokeWidth={1.3} />
+                  )}
                 </div>
                 <div className="p-8 sm:p-10">
                   <h3 className="text-2xl font-extrabold text-slate-900 sm:text-3xl">{titulo}</h3>
@@ -575,6 +583,7 @@ function Contacto() {
             <Button type="submit" size="lg" variant="whatsapp" className="mt-6 w-full" disabled={estado === 'enviando'}>
               <MessageCircle /> {estado === 'enviando' ? 'Enviando…' : 'Quiero que me contacten'}
             </Button>
+            <p className="mt-3 text-center text-xs text-slate-500">Al enviar aceptas nuestro <a href="/aviso-de-privacidad" className="underline hover:text-violet-700">aviso de privacidad</a>.</p>
             {estado === 'error' && (
               <p className="mt-3 text-center text-sm font-medium text-red-600" role="alert">
                 No se pudo enviar. Intenta de nuevo o <a href={`mailto:${negocio.correo}`} className="underline">escríbenos por correo</a>.
@@ -599,7 +608,7 @@ function Footer() {
         <nav className="flex flex-wrap justify-center gap-x-6 gap-y-2 text-sm font-medium text-slate-200" aria-label="Pie de página">
           {enlaces.map((e) => <a key={e.href} href={e.href} className="hover:text-orange-300">{e.label}</a>)}
         </nav>
-        <p className="text-sm text-slate-400">© {new Date().getFullYear()} DHR Calidad</p>
+        <p className="text-center text-sm text-slate-400 md:text-right">© {new Date().getFullYear()} DHR Calidad<br /><a href="/aviso-de-privacidad" className="hover:text-orange-300">Aviso de privacidad</a></p>
       </div>
     </footer>
   )
