@@ -178,9 +178,9 @@ function Franja() {
   )
 }
 
-function Titulo({ etiqueta, titulo, sub, light = false, ancho = false }: { etiqueta: string; titulo: React.ReactNode; sub?: string; light?: boolean; ancho?: boolean }) {
+function Titulo({ etiqueta, titulo, sub, light = false, ancho = false, extra = false }: { etiqueta: string; titulo: React.ReactNode; sub?: string; light?: boolean; ancho?: boolean; extra?: boolean }) {
   return (
-    <div className={cn('mx-auto text-center', ancho ? 'max-w-4xl' : 'max-w-3xl')}>
+    <div className={cn('mx-auto text-center', extra ? 'max-w-6xl' : ancho ? 'max-w-4xl' : 'max-w-3xl')}>
       <p className={cn('text-sm font-bold uppercase tracking-widest', light ? 'text-orange-300' : 'text-violet-600')}>{etiqueta}</p>
       <h2 className={cn('mt-3 text-balance text-3xl font-extrabold tracking-tight sm:text-4xl lg:text-5xl', light ? 'text-white' : 'text-slate-900')}>{titulo}</h2>
       {sub && <p className={cn('mt-5 text-balance text-lg leading-relaxed', light ? 'text-violet-100' : 'text-slate-600')}>{sub}</p>}
@@ -298,7 +298,7 @@ function Industrias() {
   return (
     <section id="industrias" className="py-14 sm:py-16">
       <div className="mx-auto max-w-7xl px-4 sm:px-6">
-        <Titulo etiqueta="Para quién" titulo="Hecha a la medida de tu tipo de empresa" sub="Cada app se diseña a partir de cómo trabajas tú, no al revés." />
+        <Titulo etiqueta="Para quién" titulo="Hecha a la medida de tu tipo de empresa" sub="Cada app se diseña a partir de cómo trabajas tú, no al revés." extra />
         <Tabs defaultValue="abogados" className="mt-12">
           <div className="flex justify-center">
             <TabsList>
