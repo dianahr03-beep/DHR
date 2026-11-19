@@ -15,6 +15,6 @@ export const negocio = {
   // Clave pública de web3forms.com: manda una copia de cada formulario a tu correo (es pública, puede ir aquí)
   web3formsKey: '3f1cf790-652d-4be7-99ec-5f5c788b901d',
   // Tiempo de entrega (se usa en frases como "Lista en ...")
-  tiempoEntrega: 'aproximadamente 4 semanas',
-  tiempoEntregaCorto: 'En 4 semanas',
+  tiempoEntrega: 'desde 4 semanas',
+  tiempoEntregaCorto: 'Desde 4 semanas',
 }

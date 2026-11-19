@@ -117,7 +117,7 @@ function Hero() {
             <span className="mt-3 block text-2xl font-bold tracking-tight text-slate-700 sm:text-3xl lg:text-[2.1rem]">con la más alta productividad</span>
           </h1>
           <p className="mt-6 max-w-xl text-lg leading-relaxed text-slate-600 sm:text-xl">
-            Creamos la app de tu empresa a la medida: tu información en un solo lugar, reportes en un clic y todo desde la computadora o el celular. Lista en {negocio.tiempoEntrega}, dependiendo del volumen de tus requerimientos, y a un costo accesible.
+            Creamos la app de tu empresa a la medida: tu información en un solo lugar, reportes en un clic y todo desde la computadora o el celular. Tu primera versión, lista desde 4 semanas; los proyectos más grandes los entregamos por etapas, y a un costo accesible.
           </p>
           <a href="#contacto" className="group mt-6 flex max-w-xl items-center gap-4 rounded-2xl border-2 border-orange-300 bg-orange-50 px-5 py-4 shadow-sm text-slate-700 transition hover:border-orange-300 hover:bg-orange-50">
             <span className="grid size-12 shrink-0 place-items-center rounded-xl bg-orange-500 text-white"><Globe className="size-6" /></span>
@@ -154,7 +154,7 @@ function Hero() {
 
 function Franja() {
   const datos = [
-    { icon: Clock, t: negocio.tiempoEntregaCorto, d: 'dependiendo del volumen de tus requerimientos' },
+    { icon: Clock, t: negocio.tiempoEntregaCorto, d: 'proyectos grandes, por etapas' },
     { icon: Smartphone, t: 'Computadora y celular', d: 'una sola app, en todos lados' },
     { icon: Users, t: 'Para todo tu equipo', d: 'cada quien ve lo que le toca' },
     { icon: ShieldCheck, t: 'Datos seguros', d: 'respaldados en la nube' },
@@ -373,7 +373,7 @@ function ComoFunciona() {
   const pasos = [
     { n: '1', icon: MessageCircle, t: 'Platicamos', d: 'Una llamada gratis para entender cómo trabajas hoy y qué te quita más tiempo.' },
     { n: '2', icon: Palette, t: 'Diseñamos contigo', d: 'Te mostramos cómo se verán las pantallas y los reportes antes de construir.' },
-    { n: '3', icon: Zap, t: 'Construimos tu app', d: `En ${negocio.tiempoEntrega} tienes tu app funcionando, con tu información.` },
+    { n: '3', icon: Zap, t: 'Construimos tu app', d: 'Desde 4 semanas tienes tu primera versión funcionando, con tu información. Si tu proyecto es grande, lo entregamos por etapas.' },
     { n: '4', icon: Rocket, t: 'La usas y crece', d: 'Capacitamos a tu equipo, la publicamos y le damos mantenimiento.' },
   ]
   return (
@@ -416,7 +416,7 @@ function Cotiza() {
 function Preguntas() {
   const faq = [
     { p: '¿Necesito saber de computación o programación?', r: 'No. Tú nos explicas cómo trabajas y nosotros hacemos todo. Si sabes usar WhatsApp, sabes usar tu app.' },
-    { p: '¿Cuánto tiempo tarda?', r: `Normalmente ${negocio.tiempoEntrega}, según lo que necesite tu proyecto. Te damos una fecha clara desde el inicio.` },
+    { p: '¿Cuánto tiempo tarda?', r: 'Una app sencilla, desde 4 semanas. Los proyectos grandes los dividimos en etapas: en cada entrega ya usas una parte de tu app mientras construimos la siguiente. Te damos una fecha clara desde el inicio.' },
     { p: '¿Funciona en el celular?', r: 'Sí. Tu app se abre desde el navegador de cualquier celular, tableta o computadora, sin instalar nada.' },
     { p: '¿Mi información está segura?', r: 'Sí. Cada persona entra con su usuario y contraseña, solo ve lo que le corresponde, y la información se guarda en la nube con respaldos.' },
     { p: '¿Puedo pedir cambios después?', r: 'Claro. Tu app crece con tu empresa: puedes agregar pantallas, reportes o usuarios cuando lo necesites.' },
