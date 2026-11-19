@@ -106,7 +106,7 @@ function Hero() {
   return (
     <section id="inicio" className="relative overflow-hidden bg-gradient-to-b from-violet-50 via-white to-white">
       <div aria-hidden className="pointer-events-none absolute -top-40 left-1/2 h-[600px] w-[1100px] -translate-x-1/2 rounded-full bg-gradient-to-r from-violet-300/40 via-fuchsia-300/30 to-orange-200/40 blur-3xl" />
-      <div className="relative mx-auto grid max-w-7xl items-center gap-14 px-4 pt-5 pb-20 sm:px-6 lg:grid-cols-[1.05fr_1fr] lg:pt-6 lg:pb-28">
+      <div className="relative mx-auto grid max-w-7xl items-center gap-14 px-4 pt-5 pb-16 sm:px-6 lg:grid-cols-[1.05fr_1fr] lg:pt-6 lg:pb-14">
         <div>
           <span className="inline-flex items-center gap-2 rounded-full border border-violet-200 bg-white px-4 py-1.5 text-sm font-semibold text-violet-700 shadow-sm">
             <Sparkles className="size-4" /> Aplicaciones y páginas web a la medida
@@ -245,7 +245,7 @@ function QueIncluye() {
     { icon: Lock, c: 'bg-sky-100 text-sky-600', t: 'Usuarios y permisos', d: 'El dueño ve todo; cada empleado ve solo lo suyo. Con usuario y contraseña.' },
     { icon: LayoutDashboard, c: 'bg-indigo-100 text-indigo-600', t: 'Tablero de control', d: 'Los números de tu empresa en una sola pantalla: lo que va bien y lo urgente.' },
     { icon: Rocket, c: 'bg-fuchsia-100 text-fuchsia-600', t: 'Publicada y con soporte', d: 'Te la entregamos funcionando en internet, y la mantenemos al día.' },
-    { icon: Globe, c: 'bg-orange-100 text-orange-600', t: 'Tu página web', d: 'También te hacemos una página como esta para atraer clientes e impulsar tus ventas.' },
+    { icon: Globe, c: 'bg-orange-100 text-orange-600', t: 'Tu página web', d: 'Diseñamos tu página web profesional, como esta, para atraer clientes e impulsar tus ventas.' },
   ]
   return (
     <section className="bg-slate-50 py-24">
@@ -441,7 +441,7 @@ function Preguntas() {
   )
 }
 
-type DatosContacto = { nombre: string; telefono: string; correo?: string; empresa?: string; giro?: string; pais?: string; mensaje?: string }
+type DatosContacto = { nombre: string; telefono: string; correo?: string; empresa?: string; necesita?: string; giro?: string; pais?: string; mensaje?: string }
 
 // Manda los datos a tu correo (Web3Forms) y a tu WhatsApp (función de Vercel). Tu número nunca está en la página.
 async function enviarContacto(d: DatosContacto, origen: string) {
@@ -460,6 +460,7 @@ async function enviarContacto(d: DatosContacto, origen: string) {
     `WhatsApp: ${d.telefono}`,
     d.correo && `Correo: ${d.correo}`,
     d.empresa && `Empresa: ${d.empresa}`,
+    d.necesita && `Necesita: ${d.necesita}`,
     d.giro && `Giro: ${d.giro}`,
     d.pais && `País: ${d.pais}`,
     d.mensaje && `Mensaje: ${d.mensaje}`,
@@ -487,7 +488,7 @@ async function enviarContacto(d: DatosContacto, origen: string) {
 }
 
 function Contacto() {
-  const vacio = { nombre: '', empresa: '', giro: 'Abogados', pais: '', telefono: '', correo: '', mensaje: '' }
+  const vacio = { nombre: '', empresa: '', necesita: '', giro: '', pais: '', telefono: '', correo: '', mensaje: '' }
   const [form, setForm] = useState(vacio)
   const [estado, setEstado] = useState<'listo' | 'enviando' | 'ok' | 'error'>('listo')
   const set = (k: keyof typeof form) => (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) =>
@@ -512,7 +513,7 @@ function Contacto() {
       <div className="relative mx-auto grid max-w-7xl overflow-hidden rounded-[2rem] bg-gradient-to-br from-violet-700 via-fuchsia-600 to-orange-500 lg:grid-cols-2">
         <div aria-hidden className="pointer-events-none absolute -left-20 -top-20 size-80 rounded-full bg-white/10 blur-2xl" />
         <div className="relative p-8 text-white sm:p-12 lg:p-16">
-          <h2 className="text-balance text-3xl font-extrabold tracking-tight sm:text-5xl">¿Listo para recuperar tu tiempo y tener el control con tu nueva aplicación?</h2>
+          <h2 className="text-balance text-3xl font-extrabold tracking-tight sm:text-5xl">¿Listo para recuperar tu tiempo y tener el control con tu nueva aplicación o página web?</h2>
           <p className="mt-5 text-lg text-white/90">Déjanos tus datos y te escribimos por WhatsApp o por correo. La primera asesoría es gratis.</p>
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">
             <Button asChild size="lg" variant="light"><a href={`mailto:${negocio.correo}`}><Mail /> Escríbenos por correo</a></Button>
@@ -547,16 +548,28 @@ function Contacto() {
               <label className="text-sm font-semibold text-slate-700">Empresa
                 <input value={form.empresa} onChange={set('empresa')} className={input} placeholder="Nombre de la empresa" autoComplete="organization" />
               </label>
+              <fieldset className="sm:col-span-2">
+                <legend className="text-sm font-semibold text-slate-700">¿Qué necesitas?</legend>
+                <div className="mt-1.5 grid grid-cols-3 gap-2">
+                  {['App', 'Página web', 'App y página web'].map((o) => (
+                    <label key={o} className={cn('cursor-pointer rounded-xl border px-3 py-2.5 text-center text-sm font-semibold transition', form.necesita === o ? 'border-violet-500 bg-violet-50 text-violet-700 ring-4 ring-violet-100' : 'border-slate-300 text-slate-600 hover:border-violet-300')}>
+                      <input type="radio" name="necesita" value={o} checked={form.necesita === o} onChange={set('necesita')} className="sr-only" required />
+                      {o}
+                    </label>
+                  ))}
+                </div>
+              </fieldset>
               <label className="text-sm font-semibold text-slate-700">Giro
-                <select value={form.giro} onChange={set('giro')} className={input}>
-                  {['Abogados', 'Doctores / clínica', 'Empresa', 'Otro'].map((g) => <option key={g}>{g}</option>)}
+                <select value={form.giro} onChange={set('giro')} className={cn(input, !form.giro && 'text-slate-400')}>
+                  <option value="" disabled>Elige tu giro</option>
+                  {['Abogados', 'Doctores / clínica', 'Comercio / tienda', 'Construcción', 'Servicios', 'Otro'].map((g) => <option key={g} className="text-slate-900">{g}</option>)}
                 </select>
               </label>
               <label className="text-sm font-semibold text-slate-700">País
                 <input value={form.pais} onChange={set('pais')} className={input} placeholder="México, Colombia, Perú…" autoComplete="country-name" />
               </label>
-              <label className="text-sm font-semibold text-slate-700 sm:col-span-2">¿Qué te gustaría controlar con tu app?
-                <textarea value={form.mensaje} onChange={set('mensaje')} rows={3} className={input} placeholder="Ej. llevo mis clientes y cobros en Excel y tardo mucho en hacer reportes" />
+              <label className="text-sm font-semibold text-slate-700 sm:col-span-2">Cuéntanos qué necesitas
+                <textarea value={form.mensaje} onChange={set('mensaje')} rows={3} className={input} placeholder="Ej. llevo mis clientes y cobros en Excel, o quiero una página para vender más" />
               </label>
             </div>
             <Button type="submit" size="lg" variant="whatsapp" className="mt-6 w-full" disabled={estado === 'enviando'}>
@@ -586,7 +599,7 @@ function Footer() {
         <nav className="flex flex-wrap justify-center gap-x-6 gap-y-2 text-sm font-medium text-slate-200" aria-label="Pie de página">
           {enlaces.map((e) => <a key={e.href} href={e.href} className="hover:text-orange-300">{e.label}</a>)}
         </nav>
-        <p className="text-sm text-slate-400">© {new Date().getFullYear()} {negocio.marca}</p>
+        <p className="text-sm text-slate-400">© {new Date().getFullYear()} DHR Calidad</p>
       </div>
     </footer>
   )
