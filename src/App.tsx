@@ -136,7 +136,7 @@ function Hero() {
 
         <div className="relative mx-auto w-full max-w-xl lg:max-w-none lg:self-start lg:mt-2">
           <BrowserFrame src="/capturas/juicios-lista.webp" alt="Lista de juicios de una app hecha para una firma de abogados" />
-          <PhoneFrame src="/capturas/celular-juicios.webp" alt="La misma lista de juicios vista en el celular" className="absolute -bottom-12 right-2 w-[26%] min-w-[110px] animate-float sm:-right-6 lg:bottom-auto lg:top-[22%] lg:-right-3 xl:-right-10 lg:w-[28%]" />
+          <PhoneFrame src="/capturas/celular-juicios.webp" alt="La misma lista de juicios vista en el celular" className="absolute -bottom-12 right-2 w-[26%] min-w-[110px] animate-float sm:-right-6 lg:bottom-auto lg:top-[22%] lg:right-0 2xl:-right-10 lg:w-[28%]" />
           <div className="absolute -bottom-6 -left-4 hidden rounded-2xl border border-slate-200 bg-white p-4 shadow-xl sm:block lg:-left-8">
             <div className="flex items-center gap-3">
               <span className="grid size-10 place-items-center rounded-xl bg-emerald-100 text-emerald-600"><FileSpreadsheet className="size-5" /></span>
