@@ -106,7 +106,7 @@ function Hero() {
   return (
     <section id="inicio" className="relative overflow-hidden bg-gradient-to-b from-violet-50 via-white to-white">
       <div aria-hidden className="pointer-events-none absolute -top-40 left-1/2 h-[600px] w-[1100px] -translate-x-1/2 rounded-full bg-gradient-to-r from-violet-300/40 via-fuchsia-300/30 to-orange-200/40 blur-3xl" />
-      <div className="relative mx-auto grid max-w-7xl items-center gap-14 px-4 pt-5 pb-16 sm:px-6 lg:grid-cols-[1.05fr_1fr] lg:pt-6 lg:pb-14">
+      <div className="relative mx-auto grid max-w-7xl items-center gap-14 px-4 pt-5 pb-12 sm:px-6 lg:grid-cols-[1.05fr_1fr] lg:pt-6 lg:pb-10">
         <div>
           <span className="inline-flex items-center gap-2 rounded-full border border-violet-200 bg-white px-4 py-1.5 text-sm font-semibold text-violet-700 shadow-sm">
             <Sparkles className="size-4" /> Aplicaciones y páginas web a la medida
@@ -200,14 +200,14 @@ function ProblemaSolucion() {
     { icon: Users, t: 'Todo tu equipo en sintonía', d: 'Cada quien ve en qué va cada asunto, sin preguntar por WhatsApp.' },
   ]
   return (
-    <section id="solucion" className="py-24">
+    <section id="solucion" className="py-14 sm:py-16">
       <div className="mx-auto max-w-7xl px-4 sm:px-6">
         <Titulo
           etiqueta="El problema"
           titulo={<>Tu empresa crece, pero la administración <span className="text-violet-600">te come el día</span></>}
           sub="Las grandes empresas tienen sistemas hechos a su medida. Las empresas pequeñas y medianas normalmente no, porque son caros y tardados. Nosotros cambiamos eso."
         />
-        <div className="mt-16 grid gap-6 lg:grid-cols-2">
+        <div className="mt-10 grid gap-6 lg:grid-cols-2">
           <div className="rounded-3xl border border-red-100 bg-red-50/60 p-8">
             <p className="inline-flex items-center gap-2 rounded-full bg-red-100 px-3 py-1 text-sm font-bold text-red-700"><X className="size-4" /> Hoy</p>
             <ul className="mt-6 space-y-5">
@@ -248,10 +248,10 @@ function QueIncluye() {
     { icon: Globe, c: 'bg-orange-100 text-orange-600', t: 'Tu página web', d: 'Diseñamos tu página web profesional, como esta, para atraer clientes e impulsar tus ventas.' },
   ]
   return (
-    <section className="bg-slate-50 py-24">
+    <section className="bg-slate-50 py-14 sm:py-16">
       <div className="mx-auto max-w-7xl px-4 sm:px-6">
         <Titulo etiqueta="Qué incluye" titulo="Una aplicación completa, diseñada para tu empresa" sub="Todo lo que necesitas en un sistema profesional, hecho completamente a la medida de tu empresa." ancho />
-        <div className="mt-16 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
           {items.map(({ icon: I, c, t, d }) => (
             <div key={t} className="group rounded-3xl border border-slate-200 bg-white p-6 transition hover:-translate-y-1 hover:border-violet-200 hover:shadow-xl hover:shadow-violet-900/5">
               <span className={cn('grid size-12 place-items-center rounded-2xl', c)}><I className="size-6" /></span>
@@ -293,7 +293,7 @@ function Industrias() {
     },
   ]
   return (
-    <section id="industrias" className="py-24">
+    <section id="industrias" className="py-14 sm:py-16">
       <div className="mx-auto max-w-7xl px-4 sm:px-6">
         <Titulo etiqueta="Para quién" titulo="Hecha para tu tipo de empresa" sub="Cada app se diseña a partir de cómo trabajas tú, no al revés." />
         <Tabs defaultValue="abogados" className="mt-12">
@@ -338,7 +338,7 @@ function Demo() {
     { id: 'equipo', label: 'Equipo', img: '/capturas/5-equipo.webp', movil: null, d: 'El dueño da de alta a su equipo y cada abogado entra con su propio usuario.' },
   ]
   return (
-    <section id="demo" className="relative overflow-hidden bg-gradient-to-br from-slate-950 via-violet-950 to-slate-950 py-24">
+    <section id="demo" className="relative overflow-hidden bg-gradient-to-br from-slate-950 via-violet-950 to-slate-950 py-14 sm:py-16">
       <div aria-hidden className="pointer-events-none absolute right-0 top-0 h-96 w-96 rounded-full bg-fuchsia-600/30 blur-3xl" />
       <div aria-hidden className="pointer-events-none absolute bottom-0 left-0 h-96 w-96 rounded-full bg-violet-600/30 blur-3xl" />
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6">
@@ -361,7 +361,7 @@ function Demo() {
             </TabsContent>
           ))}
         </Tabs>
-        <div className="mt-16 text-center">
+        <div className="mt-10 text-center">
           <Button asChild size="lg" variant="light"><a href="#contacto">Quiero mi app <ArrowRight /></a></Button>
         </div>
       </div>
@@ -377,10 +377,10 @@ function ComoFunciona() {
     { n: '4', icon: Rocket, t: 'La usas y crece', d: 'Capacitamos a tu equipo, la publicamos y le damos mantenimiento.' },
   ]
   return (
-    <section className="py-24">
+    <section className="py-14 sm:py-16">
       <div className="mx-auto max-w-7xl px-4 sm:px-6">
         <Titulo etiqueta="Cómo funciona" titulo="Danos tu idea para tu aplicación en 4 pasos" sub="Sin tecnicismos. Tú nos cuentas tu empresa; nosotros nos encargamos de lo demás." />
-        <ol className="relative mt-16 grid gap-8 md:grid-cols-2 lg:grid-cols-4">
+        <ol className="relative mt-10 grid gap-8 md:grid-cols-2 lg:grid-cols-4">
           <div aria-hidden className="absolute left-0 right-0 top-8 hidden h-0.5 bg-gradient-to-r from-violet-200 via-fuchsia-200 to-orange-200 lg:block" />
           {pasos.map(({ n, icon: I, t, d }) => (
             <li key={n} className="relative text-center">
@@ -400,7 +400,7 @@ function ComoFunciona() {
 
 function Cotiza() {
   return (
-    <section id="cotiza" className="bg-slate-50 py-24">
+    <section id="cotiza" className="bg-slate-50 py-14 sm:py-16">
       <div className="mx-auto max-w-7xl px-4 sm:px-6">
         <div className="flex flex-col items-center gap-5 rounded-3xl border border-violet-200 bg-white p-8 text-center shadow-xl shadow-violet-900/5 sm:p-14">
           <p className="text-sm font-bold uppercase tracking-widest text-violet-600">Cotiza tu proyecto</p>
@@ -425,7 +425,7 @@ function Preguntas() {
     { p: '¿Puedo pasar mis datos de Excel?', r: 'Sí. Te ayudamos a cargar tu información actual para que empieces a usar la app desde el primer día.' },
   ]
   return (
-    <section id="preguntas" className="py-24">
+    <section id="preguntas" className="py-14 sm:py-16">
       <div className="mx-auto max-w-3xl px-4 sm:px-6">
         <Titulo etiqueta="Preguntas frecuentes" titulo="Resolvemos tus dudas" />
         <Accordion type="single" collapsible className="mt-12 space-y-3">
@@ -509,7 +509,7 @@ function Contacto() {
   const input = 'mt-1.5 w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-slate-900 placeholder:text-slate-400 focus:border-violet-500 focus:outline-none focus:ring-4 focus:ring-violet-100'
 
   return (
-    <section id="contacto" className="px-4 pb-24 sm:px-6">
+    <section id="contacto" className="px-4 pb-16 sm:px-6">
       <div className="relative mx-auto grid max-w-7xl overflow-hidden rounded-[2rem] bg-gradient-to-br from-violet-700 via-fuchsia-600 to-orange-500 lg:grid-cols-2">
         <div aria-hidden className="pointer-events-none absolute -left-20 -top-20 size-80 rounded-full bg-white/10 blur-2xl" />
         <div className="relative p-8 text-white sm:p-12 lg:p-16">
