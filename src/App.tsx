@@ -108,16 +108,18 @@ function Hero() {
       <div aria-hidden className="pointer-events-none absolute -top-40 left-1/2 h-[600px] w-[1100px] -translate-x-1/2 rounded-full bg-gradient-to-r from-violet-300/40 via-fuchsia-300/30 to-orange-200/40 blur-3xl" />
       <div className="relative mx-auto grid max-w-7xl items-center gap-14 px-4 pt-5 pb-12 sm:px-6 lg:grid-cols-[1.05fr_1fr] lg:pt-6 lg:pb-10">
         <div>
+          <h1>
           <span className="inline-flex items-center gap-2 rounded-full border border-violet-200 bg-white px-4 py-1.5 text-sm font-semibold text-violet-700 shadow-sm">
-            <Sparkles className="size-4" /> Aplicaciones y páginas web a la medida
+            <Sparkles className="size-4" /> Aplicaciones y páginas web a la medida para empresas
           </span>
-          <h1 className="mt-6 text-4xl font-extrabold leading-[1.08] tracking-tight text-slate-900 sm:text-5xl lg:text-6xl">
+          <span className="mt-6 block text-4xl font-extrabold leading-[1.08] tracking-tight text-slate-900 sm:text-5xl lg:text-6xl">
             Tu empresa{' '}
             <span className="bg-gradient-to-r from-violet-600 via-fuchsia-500 to-orange-500 bg-clip-text text-transparent">bajo tu control</span>
             <span className="mt-3 block text-2xl font-bold tracking-tight text-slate-700 sm:text-3xl lg:text-[2.1rem]">con la más alta productividad</span>
+          </span>
           </h1>
           <p className="mt-6 max-w-xl text-lg leading-relaxed text-slate-600 sm:text-xl">
-            Creamos la app de tu empresa a la medida: ve en tiempo real cómo va tu empresa, quién avanza y cuánto ganas, desde la computadora o el celular. Tu primera versión, lista desde 4 semanas; los proyectos más grandes los entregamos por etapas, y a un costo accesible.
+            Creamos la aplicación o sistema de tu empresa a la medida: ve en tiempo real cómo va tu empresa, quién avanza y cuánto ganas, desde la computadora o el celular. Tu primera versión, lista desde 4 semanas; los proyectos más grandes los entregamos por etapas, y a un costo accesible.
           </p>
           <a href="#contacto" className="group mt-6 flex max-w-xl items-center gap-4 rounded-2xl border-2 border-orange-300 bg-orange-50 px-5 py-4 shadow-sm text-slate-700 transition hover:border-orange-300 hover:bg-orange-50">
             <span className="grid size-12 shrink-0 place-items-center rounded-xl bg-orange-500 text-white"><Globe className="size-6" /></span>
@@ -250,7 +252,7 @@ function QueIncluye() {
   return (
     <section className="bg-slate-50 py-14 sm:py-16">
       <div className="mx-auto max-w-7xl px-4 sm:px-6">
-        <Titulo etiqueta="Qué incluye" titulo="Una aplicación completa, diseñada para tu empresa" sub="Todo lo que necesitas en un sistema profesional, hecho completamente a la medida de tu empresa." ancho />
+        <Titulo etiqueta="Qué incluye" titulo="Desarrollo de aplicaciones a la medida para tu empresa" sub="Todo lo que necesitas en un sistema profesional, hecho completamente a la medida de tu empresa." ancho />
         <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
           {items.map(({ icon: I, c, t, d }) => (
             <div key={t} className="group rounded-3xl border border-slate-200 bg-white p-6 transition hover:-translate-y-1 hover:border-violet-200 hover:shadow-xl hover:shadow-violet-900/5">
@@ -269,20 +271,20 @@ function Industrias() {
   const lista = [
     {
       id: 'abogados', icon: Scale, nombre: 'Abogados', color: 'from-violet-600 to-indigo-600',
-      titulo: 'Control de juicios y cobros para tu despacho',
+      titulo: 'Sistema para despachos de abogados: control de juicios y cobros',
       texto: 'Sabe en qué va cada expediente, quién lo lleva, cuál es el siguiente paso y cuánto deja cada caso.',
       puntos: ['Expedientes con su historial de movimientos', 'Siguiente paso de cada caso', 'Cobros, gastos, impuestos y comisiones', 'Reporte diario por estatus'],
       img: '/capturas/1-tablero-dueno.webp', movil: '/capturas/8-celular-tablero.webp',
     },
     {
       id: 'doctores', icon: Stethoscope, nombre: 'Doctores y clínicas', color: 'from-emerald-500 to-teal-600',
-      titulo: 'Tu consultorio organizado, sin papeles',
+      titulo: 'Sistema para consultorios y clínicas, sin papeles',
       texto: 'Pacientes, citas y cobros en un solo lugar, para ti y para tu recepción.',
       puntos: ['Expediente de cada paciente', 'Agenda de citas y recordatorios', 'Control de pagos y pendientes', 'Reporte de ingresos del mes'],
     },
     {
       id: 'empresas', icon: Building2, nombre: 'Empresas', color: 'from-orange-500 to-pink-500',
-      titulo: 'La operación de tu empresa, en tiempo real',
+      titulo: 'Sistema para empresas: tu operación en tiempo real',
       texto: 'Para pequeñas, medianas y grandes empresas: ventas, inventario, proyectos o lo que tu equipo necesite controlar.',
       puntos: ['Seguimiento de clientes y ventas', 'Inventario y pedidos', 'Tareas y proyectos por área', 'Tablero para dirección'],
     },
@@ -377,6 +379,40 @@ function Demo() {
   )
 }
 
+function PaginasWeb() {
+  const items = [
+    { icon: Palette, t: 'Página web profesional', d: 'Con tu logo, tus colores y textos que venden, para dar la mejor imagen de tu empresa.' },
+    { icon: Smartphone, t: 'Perfecta en el celular', d: 'Se ve y funciona igual de bien en celular, tableta o computadora.' },
+    { icon: BarChart3, t: 'Lista para aparecer en Google', d: 'La preparamos para que te encuentren cuando buscan lo que ofreces.' },
+    { icon: MessageCircle, t: 'WhatsApp y formulario', d: 'Tus clientes te escriben en un clic y te llega el aviso al instante.' },
+  ]
+  return (
+    <section id="paginas-web" className="bg-orange-50/60 py-14 sm:py-16">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6">
+        <Titulo etiqueta="Páginas web" titulo="Diseño de páginas web para empresas" sub="Diseñamos tu página web profesional, como esta, para atraer clientes e impulsar tus ventas." ancho />
+        <div className="mt-10 grid items-center gap-10 lg:grid-cols-[1.1fr_1fr]">
+          <div className="relative mx-auto w-full max-w-2xl pb-6">
+            <BrowserFrame src="/capturas/pagina-web-dhr.webp" alt="Ejemplo de página web profesional para empresa hecha por DHR Calidad" className="w-full" />
+            <PhoneFrame src="/capturas/pagina-web-dhr-celular.webp" alt="La página web vista en el celular" className="absolute -bottom-2 -right-2 w-[24%] min-w-[90px] sm:-right-5" />
+          </div>
+          <div>
+            <div className="grid gap-4 sm:grid-cols-2">
+              {items.map(({ icon: I, t, d }) => (
+                <div key={t} className="rounded-3xl border border-orange-100 bg-white p-6 shadow-sm">
+                  <span className="grid size-12 place-items-center rounded-2xl bg-orange-100 text-orange-600"><I className="size-6" /></span>
+                  <h3 className="mt-4 text-lg font-bold text-slate-900">{t}</h3>
+                  <p className="mt-1.5 leading-relaxed text-slate-600">{d}</p>
+                </div>
+              ))}
+            </div>
+            <Button asChild className="mt-8"><a href="#contacto">Quiero mi página web <ArrowRight /></a></Button>
+          </div>
+        </div>
+      </div>
+    </section>
+  )
+}
+
 function ComoFunciona() {
   const pasos = [
     { n: '1', icon: MessageCircle, t: 'Platicamos', d: 'Una llamada gratis para entender cómo trabajas hoy y qué te quita más tiempo.' },
@@ -387,7 +423,7 @@ function ComoFunciona() {
   return (
     <section className="py-14 sm:py-16">
       <div className="mx-auto max-w-7xl px-4 sm:px-6">
-        <Titulo etiqueta="Cómo funciona" titulo="Danos tu idea para tu aplicación en 4 pasos" sub="Sin tecnicismos. Tú nos cuentas tu empresa; nosotros nos encargamos de lo demás." />
+        <Titulo etiqueta="Cómo funciona" titulo="Así hacemos tu aplicación en 4 pasos" sub="Sin tecnicismos. Tú nos cuentas tu empresa; nosotros nos encargamos de lo demás." />
         <ol className="relative mt-10 grid gap-8 md:grid-cols-2 lg:grid-cols-4">
           <div aria-hidden className="absolute left-0 right-0 top-8 hidden h-0.5 bg-gradient-to-r from-violet-200 via-fuchsia-200 to-orange-200 lg:block" />
           {pasos.map(({ n, icon: I, t, d }) => (
@@ -688,6 +724,7 @@ export default function App() {
         <QueIncluye />
         <Industrias />
         <Demo />
+        <PaginasWeb />
         <ComoFunciona />
         <Cotiza />
         <Preguntas />
