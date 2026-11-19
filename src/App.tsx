@@ -117,7 +117,7 @@ function Hero() {
             <span className="mt-3 block text-2xl font-bold tracking-tight text-slate-700 sm:text-3xl lg:text-[2.1rem]">con la más alta productividad</span>
           </h1>
           <p className="mt-6 max-w-xl text-lg leading-relaxed text-slate-600 sm:text-xl">
-            Creamos la app de tu empresa a la medida: tu información en un solo lugar, reportes en un clic y todo desde la computadora o el celular. Tu primera versión, lista desde 4 semanas; los proyectos más grandes los entregamos por etapas, y a un costo accesible.
+            Creamos la app de tu empresa a la medida: ve en tiempo real cómo va tu empresa, quién avanza y cuánto ganas, desde la computadora o el celular. Tu primera versión, lista desde 4 semanas; los proyectos más grandes los entregamos por etapas, y a un costo accesible.
           </p>
           <a href="#contacto" className="group mt-6 flex max-w-xl items-center gap-4 rounded-2xl border-2 border-orange-300 bg-orange-50 px-5 py-4 shadow-sm text-slate-700 transition hover:border-orange-300 hover:bg-orange-50">
             <span className="grid size-12 shrink-0 place-items-center rounded-xl bg-orange-500 text-white"><Globe className="size-6" /></span>
