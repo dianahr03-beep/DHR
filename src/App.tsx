@@ -461,9 +461,13 @@ function Preguntas() {
   const faq = [
     { p: '¿Necesito saber de computación o programación?', r: 'No. Tú nos explicas cómo trabajas y nosotros hacemos todo. Si sabes usar WhatsApp, sabes usar tu app.' },
     { p: '¿Cuánto tiempo tarda?', r: 'Una app sencilla, desde 4 semanas. Los proyectos grandes los dividimos en etapas: en cada entrega ya usas una parte de tu app mientras construimos la siguiente. Te damos una fecha clara desde el inicio.' },
+    { p: '¿Cuánto cuesta hacer una aplicación?', r: 'Depende de lo que necesites: cuántas pantallas, usuarios y reportes lleve. Por eso cada proyecto se cotiza a la medida, y la cotización es sin costo ni compromiso. Además, la puedes hacer por etapas para que la inversión sea más ligera.' },
+    { p: '¿Cuánto cuesta una página web?', r: 'Depende de cuántas secciones lleve y de lo que quieras que haga: formulario, chat, WhatsApp o catálogo. Cuéntanos qué necesitas y te enviamos tu cotización sin costo.' },
     { p: '¿Funciona en el celular?', r: 'Sí. Tu app se abre desde el navegador de cualquier celular, tableta o computadora, sin instalar nada.' },
+    { p: '¿Hay que descargarla de Play Store o App Store?', r: 'No. Tu app se abre desde el navegador del celular o la computadora, sin instalar nada. Si quieres, puedes ponerle un acceso directo en la pantalla de tu celular, como cualquier app.' },
     { p: '¿Mi información está segura?', r: 'Sí. Cada persona entra con su usuario y contraseña, solo ve lo que le corresponde, y la información se guarda en la nube con respaldos.' },
     { p: '¿También hacen páginas web?', r: 'Sí. Diseñamos páginas web profesionales para empresas, como esta: rápidas, adaptadas al celular, con formulario de contacto y chat, para atraer clientes e impulsar tus ventas.' },
+    { p: '¿Qué diferencia hay entre una app y una página web?', r: 'La página web es tu carta de presentación: atrae clientes y les dice quién eres. La app es tu herramienta de trabajo diaria: controla tus clientes, tu equipo, tus cobros y tus reportes. Podemos hacerte las dos.' },
     { p: '¿Puedo pedir cambios después?', r: 'Claro. Tu app crece con tu empresa: puedes agregar pantallas, reportes o usuarios cuando lo necesites.' },
     { p: '¿Trabajan con empresas fuera de mi país?', r: 'Sí. Trabajamos de forma remota, por videollamada y WhatsApp, así que podemos atenderte donde estés.' },
     { p: '¿Puedo pasar mis datos de Excel?', r: 'Sí. Te ayudamos a cargar tu información actual para que empieces a usar la app desde el primer día.' },
