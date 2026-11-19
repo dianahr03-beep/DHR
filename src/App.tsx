@@ -109,7 +109,7 @@ function Hero() {
       <div className="relative mx-auto grid max-w-7xl items-center gap-14 px-4 pt-5 pb-20 sm:px-6 lg:grid-cols-[1.05fr_1fr] lg:pt-6 lg:pb-28">
         <div>
           <span className="inline-flex items-center gap-2 rounded-full border border-violet-200 bg-white px-4 py-1.5 text-sm font-semibold text-violet-700 shadow-sm">
-            <Sparkles className="size-4" /> Aplicaciones para tu empresa
+            <Sparkles className="size-4" /> Aplicaciones y páginas web a la medida
           </span>
           <h1 className="mt-6 text-4xl font-extrabold leading-[1.08] tracking-tight text-slate-900 sm:text-5xl lg:text-6xl">
             Tu empresa{' '}
@@ -135,8 +135,8 @@ function Hero() {
         </div>
 
         <div className="relative mx-auto w-full max-w-xl lg:max-w-none lg:self-start lg:mt-12">
-          <BrowserFrame src="/capturas/juicios-lista.webp" alt="Lista de juicios de una app hecha para una firma de abogados" />
-          <PhoneFrame src="/capturas/celular-juicios.webp" alt="La misma lista de juicios vista en el celular" className="absolute -bottom-12 right-2 w-[26%] min-w-[110px] animate-float sm:-right-6 lg:bottom-auto lg:top-[22%] lg:right-0 2xl:-right-10 lg:w-[28%]" />
+          <BrowserFrame src="/capturas/juicios-lista.webp" alt="Aplicación a la medida para un despacho de abogados: lista de juicios, estatus y utilidad por expediente" />
+          <PhoneFrame src="/capturas/celular-juicios.webp" alt="La misma aplicación para empresas vista en el celular" className="absolute -bottom-12 right-2 w-[26%] min-w-[110px] animate-float sm:-right-6 lg:bottom-auto lg:top-[22%] lg:right-0 2xl:-right-10 lg:w-[28%]" />
           <div className="absolute -bottom-6 -left-4 hidden rounded-2xl border border-slate-200 bg-white p-4 shadow-xl sm:block lg:-left-8">
             <div className="flex items-center gap-3">
               <span className="grid size-10 place-items-center rounded-xl bg-emerald-100 text-emerald-600"><FileSpreadsheet className="size-5" /></span>
@@ -353,7 +353,7 @@ function Demo() {
             <TabsContent key={v.id} value={v.id} className="mt-10">
               <p className="mx-auto mb-8 max-w-2xl text-center text-lg text-violet-100">{v.d}</p>
               <div className="relative mx-auto max-w-5xl">
-                <BrowserFrame src={v.img} alt={`Pantalla: ${v.label}`} className="max-h-[760px] [&_img]:object-cover [&_img]:object-top" />
+                <BrowserFrame src={v.img} alt={`Sistema a la medida para empresas, pantalla de ${v.label}`} className="max-h-[760px] [&_img]:object-cover [&_img]:object-top" />
                 {v.movil && (
                   <PhoneFrame src={v.movil} alt={`${v.label} en el celular`} className="absolute -bottom-8 -right-2 hidden w-44 sm:block lg:-right-12" />
                 )}
@@ -419,6 +419,7 @@ function Preguntas() {
     { p: '¿Cuánto tiempo tarda?', r: 'Una app sencilla, desde 4 semanas. Los proyectos grandes los dividimos en etapas: en cada entrega ya usas una parte de tu app mientras construimos la siguiente. Te damos una fecha clara desde el inicio.' },
     { p: '¿Funciona en el celular?', r: 'Sí. Tu app se abre desde el navegador de cualquier celular, tableta o computadora, sin instalar nada.' },
     { p: '¿Mi información está segura?', r: 'Sí. Cada persona entra con su usuario y contraseña, solo ve lo que le corresponde, y la información se guarda en la nube con respaldos.' },
+    { p: '¿También hacen páginas web?', r: 'Sí. Diseñamos páginas web profesionales para empresas, como esta: rápidas, adaptadas al celular, con formulario de contacto y chat, para atraer clientes e impulsar tus ventas.' },
     { p: '¿Puedo pedir cambios después?', r: 'Claro. Tu app crece con tu empresa: puedes agregar pantallas, reportes o usuarios cuando lo necesites.' },
     { p: '¿Trabajan con empresas fuera de mi país?', r: 'Sí. Trabajamos de forma remota, por videollamada y WhatsApp, así que podemos atenderte donde estés.' },
     { p: '¿Puedo pasar mis datos de Excel?', r: 'Sí. Te ayudamos a cargar tu información actual para que empieces a usar la app desde el primer día.' },

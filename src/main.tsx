@@ -1,10 +1,14 @@
 import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
+import { createRoot, hydrateRoot } from 'react-dom/client'
 import './index.css'
 import App from './App.tsx'
 
-createRoot(document.getElementById('root')!).render(
+const raiz = document.getElementById('root')!
+const app = (
   <StrictMode>
     <App />
-  </StrictMode>,
+  </StrictMode>
 )
+// Si la página ya viene armada (para Google), solo se "despierta"; si no, se arma desde cero.
+if (raiz.hasChildNodes()) hydrateRoot(raiz, app)
+else createRoot(raiz).render(app)
