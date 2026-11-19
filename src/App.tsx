@@ -123,7 +123,7 @@ function Hero() {
           </p>
           <a href="#contacto" className="group mt-6 flex max-w-xl items-center gap-4 rounded-2xl border-2 border-orange-300 bg-orange-50 px-5 py-4 shadow-sm text-slate-700 transition hover:border-orange-300 hover:bg-orange-50">
             <span className="grid size-12 shrink-0 place-items-center rounded-xl bg-orange-500 text-white"><Globe className="size-6" /></span>
-            <span className="text-base leading-snug sm:text-lg"><b className="text-slate-900">Diseñamos tu página web profesional</b>, como esta, para impulsar tu empresa y tus ventas.</span>
+            <span className="text-base leading-snug sm:text-lg"><b className="text-slate-900">Diseñamos tu página web profesional</b>, como la que estás viendo, para impulsar tu empresa y tus ventas.</span>
           </a>
           <div className="mt-7 flex flex-col gap-3 sm:flex-row">
             <Button asChild size="lg" variant="accent"><a href="#contacto">Quiero mi app <ArrowRight /></a></Button>
@@ -247,7 +247,7 @@ function QueIncluye() {
     { icon: Lock, c: 'bg-sky-100 text-sky-600', t: 'Usuarios y permisos', d: 'El dueño ve todo; cada empleado ve solo lo suyo. Con usuario y contraseña.' },
     { icon: LayoutDashboard, c: 'bg-indigo-100 text-indigo-600', t: 'Tablero de control', d: 'Los números de tu empresa en una sola pantalla: lo que va bien y lo urgente.' },
     { icon: Rocket, c: 'bg-fuchsia-100 text-fuchsia-600', t: 'Publicada y con soporte', d: 'Te la entregamos funcionando en internet, y la mantenemos al día.' },
-    { icon: Globe, c: 'bg-orange-100 text-orange-600', t: 'Tu página web', d: 'Diseñamos tu página web profesional, como esta, para atraer clientes e impulsar tus ventas.' },
+    { icon: Globe, c: 'bg-orange-100 text-orange-600', t: 'Tu página web', d: 'Diseñamos tu página web profesional, como la que estás viendo, para atraer clientes e impulsar tus ventas.' },
   ]
   return (
     <section className="bg-slate-50 py-14 sm:py-16">
@@ -389,7 +389,7 @@ function PaginasWeb() {
   return (
     <section id="paginas-web" className="bg-orange-50/60 py-14 sm:py-16">
       <div className="mx-auto max-w-7xl px-4 sm:px-6">
-        <Titulo etiqueta="Páginas web" titulo="Diseño de páginas web para empresas" sub="Diseñamos tu página web profesional, como esta, para atraer clientes e impulsar tus ventas." ancho />
+        <Titulo etiqueta="Páginas web" titulo="Diseño de páginas web para empresas" sub="Diseñamos tu página web profesional, como la que estás viendo, para atraer clientes e impulsar tus ventas." ancho />
         <div className="mt-10 grid items-center gap-10 lg:grid-cols-[1.1fr_1fr]">
           <div className="relative mx-auto w-full max-w-2xl pb-6">
             <BrowserFrame src="/capturas/pagina-web-dhr.webp" alt="Ejemplo de página web profesional para empresa hecha por DHR Calidad" className="w-full" />
@@ -466,7 +466,7 @@ function Preguntas() {
     { p: '¿Funciona en el celular?', r: 'Sí. Tu app se abre desde el navegador de cualquier celular, tableta o computadora, sin instalar nada.' },
     { p: '¿Hay que descargarla de Play Store o App Store?', r: 'No. Tu app se abre desde el navegador del celular o la computadora, sin instalar nada. Si quieres, puedes ponerle un acceso directo en la pantalla de tu celular, como cualquier app.' },
     { p: '¿Mi información está segura?', r: 'Sí. Cada persona entra con su usuario y contraseña, solo ve lo que le corresponde, y la información se guarda en la nube con respaldos.' },
-    { p: '¿También hacen páginas web?', r: 'Sí. Diseñamos páginas web profesionales para empresas, como esta: rápidas, adaptadas al celular, con formulario de contacto y chat, para atraer clientes e impulsar tus ventas.' },
+    { p: '¿También hacen páginas web?', r: 'Sí. Diseñamos páginas web profesionales para empresas, como la que estás viendo: rápidas, adaptadas al celular, con formulario de contacto y chat, para atraer clientes e impulsar tus ventas.' },
     { p: '¿Qué diferencia hay entre una app y una página web?', r: 'La página web es tu carta de presentación: atrae clientes y les dice quién eres. La app es tu herramienta de trabajo diaria: controla tus clientes, tu equipo, tus cobros y tus reportes. Podemos hacerte las dos.' },
     { p: '¿Puedo pedir cambios después?', r: 'Claro. Tu app crece con tu empresa: puedes agregar pantallas, reportes o usuarios cuando lo necesites.' },
     { p: '¿Trabajan con empresas fuera de mi país?', r: 'Sí. Trabajamos de forma remota, por videollamada y WhatsApp, así que podemos atenderte donde estés.' },
