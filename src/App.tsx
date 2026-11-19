@@ -298,7 +298,7 @@ function Industrias() {
   return (
     <section id="industrias" className="py-14 sm:py-16">
       <div className="mx-auto max-w-7xl px-4 sm:px-6">
-        <Titulo etiqueta="Para quién" titulo="Hecha para tu tipo de empresa" sub="Cada app se diseña a partir de cómo trabajas tú, no al revés." />
+        <Titulo etiqueta="Para quién" titulo="Hecha a la medida de tu tipo de empresa" sub="Cada app se diseña a partir de cómo trabajas tú, no al revés." />
         <Tabs defaultValue="abogados" className="mt-12">
           <div className="flex justify-center">
             <TabsList>
