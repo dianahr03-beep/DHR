@@ -121,7 +121,7 @@ function Hero() {
           </p>
           <a href="#contacto" className="group mt-6 flex max-w-xl items-center gap-4 rounded-2xl border-2 border-orange-300 bg-orange-50 px-5 py-4 shadow-sm text-slate-700 transition hover:border-orange-300 hover:bg-orange-50">
             <span className="grid size-12 shrink-0 place-items-center rounded-xl bg-orange-500 text-white"><Globe className="size-6" /></span>
-            <span className="text-base leading-snug sm:text-lg"><b className="text-slate-900">También diseñamos tu página web profesional</b>, como esta, para impulsar tu empresa y tus ventas.</span>
+            <span className="text-base leading-snug sm:text-lg"><b className="text-slate-900">Diseñamos tu página web profesional</b>, como esta, para impulsar tu empresa y tus ventas.</span>
           </a>
           <div className="mt-7 flex flex-col gap-3 sm:flex-row">
             <Button asChild size="lg" variant="accent"><a href="#contacto">Quiero mi app <ArrowRight /></a></Button>
