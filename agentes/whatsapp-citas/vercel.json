@@ -1,0 +1,11 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "schedules": {
+    "recordatorios-citas": {
+      "schedule": "0 10 * * *",
+      "timezone": "America/Mexico_City",
+      "path": "/api/recordatorios",
+      "requestMethod": "GET"
+    }
+  }
+}
