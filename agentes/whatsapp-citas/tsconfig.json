@@ -8,5 +8,5 @@
     "noEmit": true,
     "types": ["node"]
   },
-  "include": ["api", "lib", "pruebas", "servidor-local.ts"]
+  "include": ["api", "lib", "pruebas", "servidor-local.ts", "demo-vercel.ts"]
 }

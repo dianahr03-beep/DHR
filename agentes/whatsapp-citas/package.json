@@ -6,7 +6,8 @@
   "scripts": {
     "simulador": "tsx servidor-local.ts",
     "pruebas": "tsx --test pruebas/*.test.ts",
-    "revisar-tipos": "tsc --noEmit"
+    "revisar-tipos": "tsc --noEmit",
+    "empaquetar-demo": "esbuild demo-vercel.ts --bundle --platform=node --format=esm --target=node20 --minify --banner:js=\"import { createRequire } from 'module'; const require = createRequire(import.meta.url);\" --outfile=../../api/agente-simulador.js && sed 's#<body>#<body data-api=\"/api/agente-simulador\">#' public/index.html > ../../public/agente-demo.html"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^1.12.0",
@@ -16,6 +17,7 @@
   "devDependencies": {
     "@types/node": "^26.6.6",
     "@vercel/node": "^32.0.0",
+    "esbuild": "^0.25.12",
     "tsx": "^4.23.15",
     "typescript": "^7.0.2"
   }

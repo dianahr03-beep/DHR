@@ -3,6 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
 <title>Simulador del agente</title>
 <style>
   :root { --fondo:#efeae2; --barra:#008069; --mio:#d9fdd3; --suyo:#ffffff; --texto:#111b21; --gris:#667781; }
@@ -47,6 +48,8 @@
   const guardado = (k, crear) => { try { return localStorage.getItem(k) || (crear && (localStorage.setItem(k, crear()), localStorage.getItem(k))) } catch { return crear ? crear() : null } }
   const telefono = guardado('sim-telefono', () => Math.random().toString(36).slice(2, 10))
   let clave = guardado('sim-clave')
+  const API = document.body.dataset.api || '/api/simulador'
+  const historial = [] // la plática se manda completa por si el servidor se reinicia
 
   function burbuja(texto, clase) {
     const d = document.createElement('div')
@@ -70,15 +73,16 @@
     boton.disabled = true
     const espera = burbuja('escribiendo…', 'suyo escribiendo')
     try {
-      const r = await fetch('/api/simulador', {
+      const r = await fetch(API, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'x-clave-simulador': clave },
-        body: JSON.stringify({ telefono, texto }),
+        body: JSON.stringify({ telefono, texto, historial }),
       })
       const datos = await r.json()
       if (r.status === 401) { clave = null; try { localStorage.removeItem('sim-clave') } catch {} }
       espera.className = 'burbuja suyo'
       espera.textContent = datos.respuesta || ('⚠️ ' + (datos.error || 'Error'))
+      if (datos.respuesta) historial.push({ rol: 'cliente', texto }, { rol: 'agente', texto: datos.respuesta })
     } catch {
       espera.className = 'burbuja suyo'
       espera.textContent = '⚠️ No hay conexión con el agente'
