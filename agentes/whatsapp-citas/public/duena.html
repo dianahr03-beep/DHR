@@ -1,0 +1,257 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Agenda del salón</title>
+<style>
+  :root { --verde:#008069; --verde-claro:#e7f5f1; --fondo:#f4f5f7; --texto:#111b21; --gris:#667781; --rojo:#c62828; --borde:#e2e5e9; --amarillo:#fff8c4; }
+  * { box-sizing:border-box; }
+  body { margin:0; font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif; background:var(--fondo); color:var(--texto); }
+  .app { max-width:560px; margin:0 auto; min-height:100dvh; }
+  header { background:var(--verde); color:#fff; padding:16px; position:sticky; top:0; z-index:2; }
+  header h1 { margin:0; font-size:19px; } header p { margin:2px 0 0; opacity:.85; font-size:13px; }
+  .tabs { display:flex; gap:8px; margin-top:12px; }
+  .tabs button { flex:1; border:0; border-radius:20px; padding:9px; font-size:15px; background:#fff3; color:#fff; cursor:pointer; }
+  .tabs button.activa { background:#fff; color:var(--verde); font-weight:600; }
+  main { padding:16px; }
+  h2 { font-size:15px; color:var(--gris); margin:18px 0 8px; }
+  h2::first-letter { text-transform:uppercase; }
+  .vacio { color:var(--gris); text-align:center; padding:24px 8px; background:#fff; border-radius:12px; }
+  .cita { background:#fff; border-radius:12px; padding:12px 14px; margin-bottom:10px; border-left:5px solid var(--verde); box-shadow:0 1px 2px #0001; }
+  .cita.nueva { animation:brillo 2.5s ease-out; }
+  @keyframes brillo { from { background:var(--amarillo); } to { background:#fff; } }
+  .cita .hora { font-weight:700; font-size:16px; }
+  .cita .quien { margin-top:2px; } .cita .det { color:var(--gris); font-size:14px; margin-top:2px; }
+  .acciones { display:flex; gap:8px; margin-top:10px; flex-wrap:wrap; }
+  .btn { border:1px solid var(--borde); background:#fff; border-radius:8px; padding:8px 12px; font-size:14px; cursor:pointer; color:var(--texto); }
+  .btn.primario { background:var(--verde); color:#fff; border-color:var(--verde); }
+  .btn.peligro { color:var(--rojo); border-color:#f3c7c7; }
+  .btn.peligro.lleno { background:var(--rojo); color:#fff; border-color:var(--rojo); }
+  .form { margin-top:10px; padding-top:10px; border-top:1px dashed var(--borde); display:grid; gap:8px; }
+  .form label { font-size:13px; color:var(--gris); }
+  input, select { width:100%; padding:10px; font-size:15px; border:1px solid var(--borde); border-radius:8px; background:#fff; }
+  .error { color:var(--rojo); font-size:13px; }
+  .avisos { background:var(--amarillo); border-radius:12px; padding:10px 14px; margin-bottom:12px; font-size:14px; }
+  .avisos b { display:block; margin-bottom:4px; } .avisos div { margin:4px 0; }
+  .toast { position:fixed; left:50%; top:16px; transform:translateX(-50%); background:var(--texto); color:#fff; padding:12px 16px; border-radius:12px; font-size:15px; z-index:9; box-shadow:0 6px 20px #0004; max-width:calc(100% - 32px); display:none; }
+  .entrar { max-width:360px; margin:15vh auto 0; padding:24px; background:#fff; border-radius:16px; box-shadow:0 2px 10px #0001; text-align:center; }
+  .entrar h1 { font-size:20px; margin:8px 0 4px; } .entrar p { color:var(--gris); margin:0 0 16px; font-size:14px; }
+  .entrar .btn { width:100%; margin-top:10px; padding:12px; font-size:16px; }
+  .pie { text-align:center; padding:8px 16px 24px; font-size:13px; color:var(--gris); }
+  .pie a { color:var(--verde); }
+</style>
+</head>
+<body>
+<div class="toast" id="toast"></div>
+
+<div id="pantallaEntrar" class="entrar">
+  <div style="font-size:40px">💅</div>
+  <h1>Agenda del salón</h1>
+  <p>Solo para la dueña. Escribe tu contraseña.</p>
+  <form id="formaEntrar">
+    <input id="contrasena" type="password" placeholder="Contraseña" autocomplete="current-password" required>
+    <div class="error" id="errorEntrar"></div>
+    <button class="btn primario">Entrar</button>
+  </form>
+</div>
+
+<div id="pantallaAgenda" class="app" hidden>
+  <header>
+    <h1 id="titulo">Agenda del salón</h1>
+    <p id="subtitulo">Las citas que agenda el asistente aparecen aquí solas</p>
+    <div class="tabs">
+      <button type="button" data-vista="hoy" class="activa">Hoy</button>
+      <button type="button" data-vista="semana">Próximos 7 días</button>
+    </div>
+  </header>
+  <main id="contenido"></main>
+  <div class="pie">Demostración: las citas se borran después de un rato.<br><a href="/agente-demo">Abrir el chat de la clienta</a> · <a href="#" id="salir">Salir</a></div>
+</div>
+
+<script>
+  const API = '/api/agente-simulador'
+  const $ = (id) => document.getElementById(id)
+  const leer = (k) => { try { return localStorage.getItem(k) } catch { return null } }
+  const guardar = (k, v) => { try { v === null ? localStorage.removeItem(k) : localStorage.setItem(k, v) } catch {} }
+
+  let clave = leer('sim-clave')
+  let vista = 'hoy'
+  let datos = null
+  let conocidas = null // ids de citas ya vistas, para avisar de las nuevas
+  let abierta = null   // cita con formulario abierto: { id, tipo }
+  let nuevas = new Set()
+
+  async function llamar(cuerpo) {
+    const r = await fetch(API, { method: 'POST', headers: { 'Content-Type': 'application/json', 'x-clave-simulador': clave || '' }, body: JSON.stringify(cuerpo) })
+    const j = await r.json().catch(() => ({ error: 'Sin respuesta del servidor' }))
+    if (r.status === 401) { salir(); throw new Error('Contraseña incorrecta') }
+    if (!r.ok) throw new Error(j.error || 'Error')
+    return j
+  }
+
+  function toast(texto) {
+    const t = $('toast')
+    t.textContent = texto
+    t.style.display = 'block'
+    clearTimeout(toast.t)
+    toast.t = setTimeout(() => { t.style.display = 'none' }, 5000)
+  }
+
+  function salir() {
+    clave = null
+    guardar('sim-clave', null)
+    $('pantallaAgenda').hidden = true
+    $('pantallaEntrar').hidden = false
+  }
+
+  async function actualizar(silencioso) {
+    try {
+      const j = await llamar({ accion: 'agenda' })
+      if (conocidas) {
+        const recien = j.citas.filter((c) => !conocidas.has(c.id))
+        for (const c of recien) nuevas.add(c.id)
+        if (recien.length) toast('🔔 Nueva cita: ' + recien[0].clienta + ', ' + recien[0].servicio + ' — ' + recien[0].fecha + ', ' + recien[0].hora)
+      }
+      conocidas = new Set(j.citas.map((c) => c.id))
+      datos = j
+      if (!abierta) pintar()
+    } catch (e) {
+      if (!silencioso) toast('⚠️ ' + e.message)
+    }
+  }
+
+  function el(tag, props, ...hijos) {
+    const e = document.createElement(tag)
+    Object.assign(e, props || {})
+    for (const h of hijos) if (h != null) e.append(h)
+    return e
+  }
+
+  function tarjeta(c) {
+    const t = el('div', { className: 'cita' + (nuevas.has(c.id) ? ' nueva' : '') },
+      el('div', { className: 'hora', textContent: c.hora + ' – ' + c.horaFin }),
+      el('div', { className: 'quien', textContent: c.clienta + ' · ' + c.servicio }),
+      el('div', { className: 'det', textContent: 'Atiende ' + c.atiende + ' · $' + c.precio }))
+    const acciones = el('div', { className: 'acciones' })
+    const mover = el('button', { className: 'btn', type: 'button', textContent: '📅 Mover' })
+    const cancelar = el('button', { className: 'btn peligro', type: 'button', textContent: 'Cancelar' })
+    mover.onclick = () => { abierta = { id: c.id, tipo: 'mover' }; pintar() }
+    cancelar.onclick = () => { abierta = { id: c.id, tipo: 'cancelar' }; pintar() }
+    acciones.append(mover, cancelar)
+    t.append(acciones)
+
+    if (abierta && abierta.id === c.id && abierta.tipo === 'cancelar') {
+      const si = el('button', { className: 'btn peligro lleno', type: 'button', textContent: 'Sí, cancelar' })
+      const no = el('button', { className: 'btn', type: 'button', textContent: 'No' })
+      const err = el('div', { className: 'error' })
+      no.onclick = () => { abierta = null; pintar() }
+      si.onclick = async () => {
+        si.disabled = true
+        try { datos = await llamar({ accion: 'cancelar', cita_id: c.id }); conocidas = new Set(datos.citas.map((x) => x.id)); abierta = null; toast('Cita de ' + c.clienta + ' cancelada'); pintar() }
+        catch (e) { err.textContent = e.message; si.disabled = false }
+      }
+      t.append(el('div', { className: 'form' }, el('div', { textContent: '¿Cancelar la cita de ' + c.clienta + '?' }), el('div', { className: 'acciones' }, si, no), err))
+    }
+
+    if (abierta && abierta.id === c.id && abierta.tipo === 'mover') {
+      const fecha = el('input', { type: 'date', value: c.dia, min: datos.hoy })
+      const hora = el('select', {}, el('option', { value: '', textContent: 'Elige el día primero' }))
+      const err = el('div', { className: 'error' })
+      const guardarBtn = el('button', { className: 'btn primario', type: 'button', textContent: 'Guardar cambio' })
+      const no = el('button', { className: 'btn', type: 'button', textContent: 'Cerrar' })
+      async function cargarHoras() {
+        hora.replaceChildren(el('option', { value: '', textContent: 'Buscando horas libres…' }))
+        err.textContent = ''
+        try {
+          const j = await llamar({ accion: 'horas', cita_id: c.id, fecha: fecha.value })
+          const libres = j.resultado.horas_libres || []
+          hora.replaceChildren(...(libres.length
+            ? libres.map((h) => el('option', { value: h.hora, textContent: aDoce(h.hora) + ' (' + h.empleadas.map((e) => e.nombre).join(', ') + ')' }))
+            : [el('option', { value: '', textContent: 'No hay horas libres ese día' })]))
+        } catch (e) { err.textContent = e.message }
+      }
+      fecha.onchange = cargarHoras
+      no.onclick = () => { abierta = null; pintar() }
+      guardarBtn.onclick = async () => {
+        if (!hora.value) { err.textContent = 'Elige una hora'; return }
+        guardarBtn.disabled = true
+        try {
+          datos = await llamar({ accion: 'mover', cita_id: c.id, fecha: fecha.value, hora: hora.value })
+          conocidas = new Set(datos.citas.map((x) => x.id))
+          abierta = null
+          toast('Cita de ' + c.clienta + ' movida a ' + aDoce(hora.value))
+          pintar()
+        } catch (e) { err.textContent = e.message; guardarBtn.disabled = false }
+      }
+      t.append(el('div', { className: 'form' },
+        el('label', { textContent: 'Nuevo día' }), fecha,
+        el('label', { textContent: 'Nueva hora (quién está libre)' }), hora,
+        el('div', { className: 'acciones' }, guardarBtn, no), err))
+      cargarHoras()
+    }
+    return t
+  }
+
+  function aDoce(hhmm) {
+    const [h, m] = hhmm.split(':').map(Number)
+    return (h % 12 || 12) + ':' + String(m).padStart(2, '0') + (h < 12 ? ' am' : ' pm')
+  }
+
+  function sumarDias(fecha, n) {
+    const d = new Date(fecha + 'T12:00:00Z'); d.setUTCDate(d.getUTCDate() + n); return d.toISOString().slice(0, 10)
+  }
+
+  function pintar() {
+    if (!datos) return
+    $('titulo').textContent = 'Agenda · ' + datos.salon
+    const c = $('contenido')
+    c.replaceChildren()
+    if (datos.avisos && datos.avisos.length) {
+      c.append(el('div', { className: 'avisos' }, el('b', { textContent: '⚠️ Necesitan que les escribas' }), ...datos.avisos.slice(0, 5).map((a) => el('div', { textContent: '• ' + a }))))
+    }
+    const limite = vista === 'hoy' ? datos.hoy : sumarDias(datos.hoy, 6)
+    const citas = datos.citas.filter((x) => x.dia <= limite)
+    if (!citas.length) {
+      c.append(el('div', { className: 'vacio', textContent: vista === 'hoy' ? 'Hoy no hay citas todavía.' : 'No hay citas en los próximos 7 días.' }))
+      if (vista === 'hoy' && datos.citas.length) c.append(el('div', { className: 'pie', textContent: 'Hay ' + datos.citas.length + ' cita(s) en otros días: revisa "Próximos 7 días".' }))
+      return
+    }
+    let dia = null
+    for (const x of citas) {
+      if (x.dia !== dia) { dia = x.dia; c.append(el('h2', { textContent: x.dia === datos.hoy ? 'Hoy · ' + x.fecha : x.fecha })) }
+      c.append(tarjeta(x))
+    }
+  }
+
+  document.querySelectorAll('.tabs button').forEach((b) => b.onclick = () => {
+    document.querySelectorAll('.tabs button').forEach((x) => x.classList.toggle('activa', x === b))
+    vista = b.dataset.vista
+    abierta = null
+    pintar()
+  })
+  $('salir').onclick = (e) => { e.preventDefault(); salir() }
+
+  async function entrar() {
+    $('pantallaEntrar').hidden = true
+    $('pantallaAgenda').hidden = false
+    await actualizar(false)
+  }
+
+  $('formaEntrar').onsubmit = async (e) => {
+    e.preventDefault()
+    clave = $('contrasena').value
+    $('errorEntrar').textContent = ''
+    try {
+      await llamar({ accion: 'agenda' })
+      guardar('sim-clave', clave)
+      entrar()
+    } catch (err) { $('pantallaAgenda').hidden = true; $('pantallaEntrar').hidden = false; $('errorEntrar').textContent = err.message }
+  }
+
+  if (clave) entrar()
+  setInterval(() => { if (clave && !document.hidden) actualizar(true) }, 8000)
+</script>
+</body>
+</html>
