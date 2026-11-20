@@ -62,6 +62,10 @@ export interface Almacen {
   crearCita(c: NuevaCita): Promise<Cita>
   citasDeCliente(telefono: string, desdeFecha: string): Promise<Cita[]>
   cancelarCita(id: number, telefono: string): Promise<boolean>
+  /** Cambia fecha/hora/empleada de una cita de esa clienta. null si no es suya. Lanza HorarioOcupadoError si ya se ocupó. */
+  moverCita(id: number, telefono: string, cambios: Pick<Cita, 'fecha' | 'inicio' | 'fin' | 'empleada_id'>): Promise<Cita | null>
+  /** Citas confirmadas de esa fecha a las que aún no se manda recordatorio; las marca como enviadas (así nunca se manda doble). */
+  reclamarRecordatorios(fecha: string): Promise<Cita[]>
   historial(telefono: string, limite: number): Promise<Mensaje[]>
   /** Devuelve false si ese mensaje de WhatsApp (waId) ya se había guardado: así no contestamos doble. */
   guardarMensaje(telefono: string, m: Mensaje, waId?: string): Promise<boolean>

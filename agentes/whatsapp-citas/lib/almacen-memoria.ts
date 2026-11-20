@@ -25,6 +25,7 @@ export function crearAlmacenMemoria(datos?: Partial<{
   const citas: Cita[] = [...(datos?.citas ?? [])]
   const mensajes = new Map<string, Mensaje[]>()
   const vistos = new Set<string>()
+  const recordados = new Set<number>()
   const avisos: { telefono: string; motivo: string }[] = []
   let siguienteId = citas.reduce((m, c) => Math.max(m, c.id), 0) + 1
 
@@ -51,6 +52,21 @@ export function crearAlmacenMemoria(datos?: Partial<{
       if (i < 0) return false
       citas.splice(i, 1)
       return true
+    },
+    async moverCita(id, tel, cambios) {
+      const cita = citas.find((c) => c.id === id && c.cliente_tel === tel)
+      if (!cita) return null
+      const empalme = citas.some((c) => c !== cita && c.empleada_id === cambios.empleada_id && c.fecha === cambios.fecha &&
+        aMinutos(c.inicio) < aMinutos(cambios.fin) && aMinutos(c.fin) > aMinutos(cambios.inicio))
+      if (empalme) throw new HorarioOcupadoError()
+      Object.assign(cita, cambios)
+      recordados.delete(id) // nueva fecha: nuevo recordatorio
+      return cita
+    },
+    async reclamarRecordatorios(fecha) {
+      const pendientes = citas.filter((c) => c.fecha === fecha && !recordados.has(c.id))
+      pendientes.forEach((c) => recordados.add(c.id))
+      return pendientes
     },
     historial: async (tel, limite) => (mensajes.get(tel) ?? []).slice(-limite),
     async guardarMensaje(tel, m, waId) {

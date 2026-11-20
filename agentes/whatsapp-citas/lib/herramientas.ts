@@ -45,6 +45,20 @@ export const definicionHerramientas: Anthropic.Tool[] = [
     input_schema: { type: 'object', properties: {}, additionalProperties: false },
   },
   {
+    name: 'cambiar_cita',
+    description: 'Cambia la fecha u hora de una cita de la persona que está escribiendo (mismo servicio). Antes consulta ver_disponibilidad y confirma con ella la nueva hora.',
+    input_schema: {
+      type: 'object',
+      properties: {
+        cita_id: { type: 'integer', description: 'id de la cita (de mis_citas)' },
+        fecha: { type: 'string', description: 'Nueva fecha AAAA-MM-DD' },
+        hora: { type: 'string', description: 'Nueva hora HH:MM en formato de 24 horas' },
+      },
+      required: ['cita_id', 'fecha', 'hora'],
+      additionalProperties: false,
+    },
+  },
+  {
     name: 'cancelar_cita',
     description: 'Cancela una cita de la persona que está escribiendo. Confirma con ella antes de cancelar.',
     input_schema: {
@@ -151,6 +165,41 @@ export async function ejecutarHerramienta(
         servicio: servicios.find((s) => s.id === c.servicio_id)?.nombre,
         atiende: empleadas.find((e) => e.id === c.empleada_id)?.nombre,
       })))
+    }
+
+    case 'cambiar_cita': {
+      const fecha = texto(entrada.fecha)
+      const hora = texto(entrada.hora)
+      if (!esFechaValida(fecha) || !esHoraValida(hora)) return error('Fecha u hora inválida')
+      const id = entero(entrada.cita_id)
+      const cita = (await almacen.citasDeCliente(telefono, ahora.fecha)).find((c) => c.id === id)
+      if (!cita) return error('No encontré esa cita a nombre de este número')
+      const servicio = (await almacen.servicios()).find((s) => s.id === cita.servicio_id)
+      if (!servicio) return error('El servicio de esa cita ya no existe; pasa con una persona')
+
+      // Para calcular horas libres no cuenta la propia cita que se va a mover
+      const libres = horariosLibres({
+        fecha, servicio, ahora,
+        empleadas: await almacen.empleadas(),
+        horarios: await almacen.horarios(),
+        citas: (await almacen.citasConfirmadasDelDia(fecha)).filter((c) => c.id !== cita.id),
+      })
+      const espacio = libres.find((l) => l.hora === hora)
+      if (!espacio) return error('Esa hora no está libre. Vuelve a consultar ver_disponibilidad.')
+      // Si su misma empleada puede, se queda con ella
+      const orden = [...espacio.empleadas].sort((a, b) => Number(b.id === cita.empleada_id) - Number(a.id === cita.empleada_id))
+      for (const empleada of orden) {
+        try {
+          const movida = await almacen.moverCita(cita.id, telefono, {
+            fecha, inicio: hora, fin: aHora(aMinutos(hora) + servicio.duracion_min), empleada_id: empleada.id,
+          })
+          if (!movida) return error('No encontré esa cita a nombre de este número')
+          return ok({ cambiada: true, cita_id: movida.id, fecha, hora, servicio: servicio.nombre, atiende: empleada.nombre })
+        } catch (e) {
+          if (!(e instanceof HorarioOcupadoError)) throw e
+        }
+      }
+      return error('Esa hora se acaba de ocupar. Ofrece otra hora.')
     }
 
     case 'cancelar_cita': {

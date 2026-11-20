@@ -47,6 +47,7 @@ create table if not exists citas (
   cliente_nombre text not null,
   cliente_tel    text not null,
   estado         text not null default 'confirmada' check (estado in ('confirmada','cancelada')),
+  recordatorio_enviado boolean not null default false,
   creada         timestamptz not null default now(),
   -- Candado: una empleada nunca puede tener dos citas confirmadas que se encimen,
   -- aunque dos clientas escriban al mismo tiempo.
@@ -55,6 +56,7 @@ create table if not exists citas (
     tsrange(fecha + inicio, fecha + fin) with &&
   ) where (estado = 'confirmada')
 );
+alter table citas add column if not exists recordatorio_enviado boolean not null default false;
 create index if not exists citas_por_fecha on citas (fecha) where estado = 'confirmada';
 create index if not exists citas_por_tel   on citas (cliente_tel, fecha);
 

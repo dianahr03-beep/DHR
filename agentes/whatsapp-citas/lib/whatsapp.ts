@@ -49,3 +49,24 @@ export async function enviarTexto(p: { para: string; texto: string; idNumero: st
   })
   if (!r.ok) throw new Error(`WhatsApp respondió ${r.status}: ${await r.text()}`)
 }
+
+/**
+ * Envía una plantilla aprobada por Meta (obligatorio para escribirle a la clienta primero,
+ * por ejemplo el recordatorio del día anterior). Los {{1}}, {{2}}... se llenan con `variables`.
+ */
+export async function enviarPlantilla(p: {
+  para: string; plantilla: string; idioma: string; variables: string[]; idNumero: string; token: string; versionApi: string
+}) {
+  const r = await fetch(`https://graph.facebook.com/${p.versionApi}/${p.idNumero}/messages`, {
+    method: 'POST',
+    headers: { Authorization: `Bearer ${p.token}`, 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      messaging_product: 'whatsapp', to: p.para, type: 'template',
+      template: {
+        name: p.plantilla, language: { code: p.idioma },
+        components: [{ type: 'body', parameters: p.variables.map((text) => ({ type: 'text', text })) }],
+      },
+    }),
+  })
+  if (!r.ok) throw new Error(`WhatsApp respondió ${r.status}: ${await r.text()}`)
+}

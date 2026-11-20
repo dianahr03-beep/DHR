@@ -56,6 +56,18 @@ export function crearAlmacenSupabase(url: string, llaveServicio: string): Almace
         .eq('id', id).eq('cliente_tel', tel).eq('estado', 'confirmada').select('id'))
       return filas.length > 0
     },
+    async moverCita(id, tel, cambios) {
+      const r = await db.from('citas').update({ ...cambios, recordatorio_enviado: false })
+        .eq('id', id).eq('cliente_tel', tel).eq('estado', 'confirmada').select('*')
+      if (r.error?.code === '23P01') throw new HorarioOcupadoError()
+      const filas = revisar(r)
+      return filas.length ? aCita(filas[0]) : null
+    },
+    async reclamarRecordatorios(fecha) {
+      // Un solo UPDATE: si el aviso programado corre dos veces, la segunda ya no encuentra nada.
+      return revisar(await db.from('citas').update({ recordatorio_enviado: true })
+        .eq('fecha', fecha).eq('estado', 'confirmada').eq('recordatorio_enviado', false).select('*')).map(aCita)
+    },
     async historial(tel, limite) {
       const filas = revisar(await db.from('mensajes').select('rol, texto').eq('telefono', tel)
         .order('creado', { ascending: false }).limit(limite))

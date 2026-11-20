@@ -69,3 +69,22 @@ export function horariosLibres(p: {
   }
   return libres
 }
+
+/** "AAAA-MM-DD" → "viernes 21 de noviembre" */
+export const fechaBonita = (fecha: string): string =>
+  new Intl.DateTimeFormat('es-MX', { timeZone: 'UTC', weekday: 'long', day: 'numeric', month: 'long' })
+    .format(new Date(`${fecha}T12:00:00Z`))
+
+/** "16:30" → "4:30 pm" */
+export const horaBonita = (hhmm: string): string => {
+  const min = aMinutos(hhmm)
+  const h = Math.floor(min / 60)
+  return `${h % 12 || 12}:${String(min % 60).padStart(2, '0')} ${h < 12 ? 'am' : 'pm'}`
+}
+
+/** Suma días a una fecha "AAAA-MM-DD". */
+export const sumarDias = (fecha: string, dias: number): string => {
+  const d = new Date(`${fecha}T12:00:00Z`)
+  d.setUTCDate(d.getUTCDate() + dias)
+  return d.toISOString().slice(0, 10)
+}
