@@ -1,0 +1,22 @@
+{
+  "name": "agente-whatsapp-citas",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "simulador": "tsx servidor-local.ts",
+    "pruebas": "tsx --test pruebas/*.test.ts",
+    "revisar-tipos": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^1.12.0",
+    "@supabase/supabase-js": "^2.119.2",
+    "@vercel/functions": "^3.11.3"
+  },
+  "devDependencies": {
+    "@types/node": "^26.6.6",
+    "@vercel/node": "^32.0.0",
+    "tsx": "^4.23.15",
+    "typescript": "^7.0.2"
+  }
+}
