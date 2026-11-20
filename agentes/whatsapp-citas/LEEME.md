@@ -18,7 +18,7 @@ Va en esta carpeta aparte, así que **no cambia la página de DHR Calidad**.
    a quien tiene cita al día siguiente. Si la clienta contesta, el agente ya sabe de qué cita se trata.
 
 Reglas que cuida el código (no la IA): precios y horarios salen solo de la base de datos,
-cada clienta solo puede ver y cancelar **sus** citas, y no se contesta dos veces el mismo mensaje.
+cada clienta solo puede ver, cambiar y cancelar **sus** citas, y no se contesta dos veces el mismo mensaje.
 
 ## Archivos
 
@@ -76,6 +76,13 @@ Referencias oficiales: [Cloud API, primeros pasos](https://developers.facebook.c
 [Números de teléfono](https://developers.facebook.com/documentation/business-messaging/whatsapp/business-phone-numbers/phone-numbers) ·
 [Precios de WhatsApp](https://developers.facebook.com/documentation/business-messaging/whatsapp/pricing) ·
 [Precios de Claude](https://platform.claude.com/docs/en/about-claude/pricing)
+
+## Probar el agente en la vista previa (sin WhatsApp ni Supabase)
+
+La vista previa del proyecto **dhr** incluye `/agente-demo`, una pantalla tipo WhatsApp con el salón de ejemplo.
+Necesita dos variables en Vercel → proyecto dhr → Environment Variables, marcadas solo en **Preview**:
+`ANTHROPIC_API_KEY` y `CLAVE_SIMULADOR`. La página publicada no la usa.
+Los archivos `api/agente-simulador.js` y `public/agente-demo.html` de la raíz se generan con `npm run empaquetar-demo`.
 
 ## Para programadores
 
